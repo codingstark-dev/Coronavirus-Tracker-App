@@ -1,7 +1,9 @@
+import 'package:coronatracker/Service_Locator/locator.dart';
 import 'package:coronatracker/screen/body.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  serviceLocator();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: LoadingPage(),
@@ -107,7 +109,7 @@ class _LoadingPageState extends State<LoadingPage> {
                       fontWeight: FontWeight.bold))
             ])),
           ),
-          elevation: 0.60,
+          elevation: 1.5,
         ),
       ),
       body: BodyContainer(),
