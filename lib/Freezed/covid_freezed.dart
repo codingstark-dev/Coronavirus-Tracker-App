@@ -10,7 +10,9 @@ abstract class Country with _$Country {
   const factory Country(
       {@Default(0) num recover,
       @Default(0) num death,
-      @Default(0) num confirmed}) = _Country;
+      @Default(0) num confirmed,
+      @Default('') @nullable String countryName,
+      @Default('') @nullable String countryFlag}) = _Country;
 
   factory Country.fromJson(Map<String, dynamic> json) =>
       _$CountryFromJson(json);

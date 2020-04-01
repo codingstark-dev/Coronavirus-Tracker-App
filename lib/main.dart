@@ -1,12 +1,19 @@
 import 'package:coronatracker/Service_Locator/locator.dart';
+import 'package:coronatracker/provider/boolstates.dart';
 import 'package:coronatracker/screen/body.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 void main() {
   serviceLocator();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: LoadingPage(),
+    home: MultiProvider(providers: <SingleChildWidget>[
+      ChangeNotifierProvider<BoolChecker>(
+        create: (context) => BoolChecker(),
+      )
+    ], child: LoadingPage()),
   ));
 }
 

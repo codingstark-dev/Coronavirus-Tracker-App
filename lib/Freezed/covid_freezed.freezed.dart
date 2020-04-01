@@ -15,11 +15,18 @@ Country _$CountryFromJson(Map<String, dynamic> json) {
 class _$CountryTearOff {
   const _$CountryTearOff();
 
-  _Country call({num recover = 0, num death = 0, num confirmed = 0}) {
+  _Country call(
+      {num recover = 0,
+      num death = 0,
+      num confirmed = 0,
+      @nullable String countryName = '',
+      @nullable String countryFlag = ''}) {
     return _Country(
       recover: recover,
       death: death,
       confirmed: confirmed,
+      countryName: countryName,
+      countryFlag: countryFlag,
     );
   }
 }
@@ -31,6 +38,10 @@ mixin _$Country {
   num get recover;
   num get death;
   num get confirmed;
+  @nullable
+  String get countryName;
+  @nullable
+  String get countryFlag;
 
   Map<String, dynamic> toJson();
   $CountryCopyWith<Country> get copyWith;
@@ -39,7 +50,12 @@ mixin _$Country {
 abstract class $CountryCopyWith<$Res> {
   factory $CountryCopyWith(Country value, $Res Function(Country) then) =
       _$CountryCopyWithImpl<$Res>;
-  $Res call({num recover, num death, num confirmed});
+  $Res call(
+      {num recover,
+      num death,
+      num confirmed,
+      @nullable String countryName,
+      @nullable String countryFlag});
 }
 
 class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
@@ -54,11 +70,17 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
     Object recover = freezed,
     Object death = freezed,
     Object confirmed = freezed,
+    Object countryName = freezed,
+    Object countryFlag = freezed,
   }) {
     return _then(_value.copyWith(
       recover: recover == freezed ? _value.recover : recover as num,
       death: death == freezed ? _value.death : death as num,
       confirmed: confirmed == freezed ? _value.confirmed : confirmed as num,
+      countryName:
+          countryName == freezed ? _value.countryName : countryName as String,
+      countryFlag:
+          countryFlag == freezed ? _value.countryFlag : countryFlag as String,
     ));
   }
 }
@@ -67,7 +89,12 @@ abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
   factory _$CountryCopyWith(_Country value, $Res Function(_Country) then) =
       __$CountryCopyWithImpl<$Res>;
   @override
-  $Res call({num recover, num death, num confirmed});
+  $Res call(
+      {num recover,
+      num death,
+      num confirmed,
+      @nullable String countryName,
+      @nullable String countryFlag});
 }
 
 class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
@@ -83,18 +110,29 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
     Object recover = freezed,
     Object death = freezed,
     Object confirmed = freezed,
+    Object countryName = freezed,
+    Object countryFlag = freezed,
   }) {
     return _then(_Country(
       recover: recover == freezed ? _value.recover : recover as num,
       death: death == freezed ? _value.death : death as num,
       confirmed: confirmed == freezed ? _value.confirmed : confirmed as num,
+      countryName:
+          countryName == freezed ? _value.countryName : countryName as String,
+      countryFlag:
+          countryFlag == freezed ? _value.countryFlag : countryFlag as String,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_Country with DiagnosticableTreeMixin implements _Country {
-  const _$_Country({this.recover = 0, this.death = 0, this.confirmed = 0})
+  const _$_Country(
+      {this.recover = 0,
+      this.death = 0,
+      this.confirmed = 0,
+      @nullable this.countryName = '',
+      @nullable this.countryFlag = ''})
       : assert(recover != null),
         assert(death != null),
         assert(confirmed != null);
@@ -111,10 +149,18 @@ class _$_Country with DiagnosticableTreeMixin implements _Country {
   @JsonKey(defaultValue: 0)
   @override
   final num confirmed;
+  @JsonKey(defaultValue: '')
+  @override
+  @nullable
+  final String countryName;
+  @JsonKey(defaultValue: '')
+  @override
+  @nullable
+  final String countryFlag;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Country(recover: $recover, death: $death, confirmed: $confirmed)';
+    return 'Country(recover: $recover, death: $death, confirmed: $confirmed, countryName: $countryName, countryFlag: $countryFlag)';
   }
 
   @override
@@ -124,7 +170,9 @@ class _$_Country with DiagnosticableTreeMixin implements _Country {
       ..add(DiagnosticsProperty('type', 'Country'))
       ..add(DiagnosticsProperty('recover', recover))
       ..add(DiagnosticsProperty('death', death))
-      ..add(DiagnosticsProperty('confirmed', confirmed));
+      ..add(DiagnosticsProperty('confirmed', confirmed))
+      ..add(DiagnosticsProperty('countryName', countryName))
+      ..add(DiagnosticsProperty('countryFlag', countryFlag));
   }
 
   @override
@@ -138,7 +186,13 @@ class _$_Country with DiagnosticableTreeMixin implements _Country {
                 const DeepCollectionEquality().equals(other.death, death)) &&
             (identical(other.confirmed, confirmed) ||
                 const DeepCollectionEquality()
-                    .equals(other.confirmed, confirmed)));
+                    .equals(other.confirmed, confirmed)) &&
+            (identical(other.countryName, countryName) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryName, countryName)) &&
+            (identical(other.countryFlag, countryFlag) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryFlag, countryFlag)));
   }
 
   @override
@@ -146,7 +200,9 @@ class _$_Country with DiagnosticableTreeMixin implements _Country {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(recover) ^
       const DeepCollectionEquality().hash(death) ^
-      const DeepCollectionEquality().hash(confirmed);
+      const DeepCollectionEquality().hash(confirmed) ^
+      const DeepCollectionEquality().hash(countryName) ^
+      const DeepCollectionEquality().hash(countryFlag);
 
   @override
   _$CountryCopyWith<_Country> get copyWith =>
@@ -159,7 +215,12 @@ class _$_Country with DiagnosticableTreeMixin implements _Country {
 }
 
 abstract class _Country implements Country {
-  const factory _Country({num recover, num death, num confirmed}) = _$_Country;
+  const factory _Country(
+      {num recover,
+      num death,
+      num confirmed,
+      @nullable String countryName,
+      @nullable String countryFlag}) = _$_Country;
 
   factory _Country.fromJson(Map<String, dynamic> json) = _$_Country.fromJson;
 
@@ -169,6 +230,12 @@ abstract class _Country implements Country {
   num get death;
   @override
   num get confirmed;
+  @override
+  @nullable
+  String get countryName;
+  @override
+  @nullable
+  String get countryFlag;
   @override
   _$CountryCopyWith<_Country> get copyWith;
 }

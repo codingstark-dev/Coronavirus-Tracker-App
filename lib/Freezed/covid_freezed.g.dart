@@ -11,6 +11,8 @@ _$_Country _$_$_CountryFromJson(Map<String, dynamic> json) {
     recover: json['recover'] as num ?? 0,
     death: json['death'] as num ?? 0,
     confirmed: json['confirmed'] as num ?? 0,
+    countryName: json['countryName'] as String ?? '',
+    countryFlag: json['countryFlag'] as String ?? '',
   );
 }
 
@@ -19,6 +21,8 @@ Map<String, dynamic> _$_$_CountryToJson(_$_Country instance) =>
       'recover': instance.recover,
       'death': instance.death,
       'confirmed': instance.confirmed,
+      'countryName': instance.countryName,
+      'countryFlag': instance.countryFlag,
     };
 
 _$_AllCountry _$_$_AllCountryFromJson(Map<String, dynamic> json) {
