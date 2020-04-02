@@ -1,11 +1,9 @@
 import 'package:coronatracker/constant/allConstant.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
-import 'package:coronatracker/screen/about.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:coronatracker/enums/connectivity_status.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuDropDownTopBar extends StatefulWidget {

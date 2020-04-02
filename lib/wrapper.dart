@@ -19,7 +19,6 @@ class Wrapper extends StatefulWidget {
 class _WrapperState extends State<Wrapper> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     firebasemassage();
     try {

@@ -1,5 +1,3 @@
-import 'package:coronatracker/main.dart';
-import 'package:coronatracker/wrapper.dart';
 import 'package:flutter/material.dart';
 
 class LoadingPAgee extends StatefulWidget {
@@ -12,7 +10,6 @@ class LoadingPAgee extends StatefulWidget {
 class _LoadingPAgeeState extends State<LoadingPAgee> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     // navigationTopage();
   }
