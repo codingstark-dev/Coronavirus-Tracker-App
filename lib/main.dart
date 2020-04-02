@@ -1,19 +1,46 @@
 import 'package:coronatracker/Service_Locator/locator.dart';
+import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
 import 'package:coronatracker/screen/body.dart';
+import 'package:coronatracker/screen/loading.dart';
+import 'package:coronatracker/service/analytics_service.dart';
+import 'package:coronatracker/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
+import 'package:coronatracker/service/connectivity_service.dart';
+import 'enums/connectivity_status.dart';
+import 'constant/allConstant.dart';
+import 'package:coronatracker/named_route.dart' as router;
 
 void main() {
   serviceLocator();
-  runApp(MaterialApp(
+  runApp(MaterialApp(navigatorObservers: [
+    sl<AnalyticsService>().getAnalyticsObserver()
+  ],
+    onGenerateRoute: router.generateRoute,
+    initialRoute: HomeViewRoute,
     debugShowCheckedModeBanner: false,
-    home: MultiProvider(providers: <SingleChildWidget>[
-      ChangeNotifierProvider<BoolChecker>(
-        create: (context) => BoolChecker(),
-      )
-    ], child: LoadingPage()),
+    home: MultiProvider(
+        providers: <SingleChildWidget>[
+          StreamProvider<ConnectivityStatus>(
+              create: (_) => ConnectivityService()
+                  .connectionStatusController
+                  .stream),
+          ChangeNotifierProvider<BoolChecker>(
+            create: (context) => BoolChecker(),
+          )
+        ],
+        child: FutureBuilder(
+            future: Future.delayed(Duration(seconds: 6)),
+            builder: (BuildContext context,
+                AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.connectionState ==
+                  ConnectionState.waiting) {
+                return LoadingPAgee();
+              }
+              return Wrapper();
+            })),
   ));
 }
 
@@ -27,6 +54,8 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
+    final BoolChecker boolChecker = Provider.of<BoolChecker>(context);
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(0, 65),
@@ -45,7 +74,7 @@ class _LoadingPageState extends State<LoadingPage> {
                       borderRadius: BorderRadius.circular(5),
                       child: Container(
                         alignment: Alignment.center,
-                        color: Color(0xffedf2f7),
+                        color: GREY_LIGHT,
                         child: Row(
                           children: <Widget>[
                             SizedBox(
@@ -54,12 +83,12 @@ class _LoadingPageState extends State<LoadingPage> {
                             Text('EN',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    color: Color(0xff108885),
+                                    color: GREEN_COLOR,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold)),
                             Icon(
                               Icons.keyboard_arrow_down,
-                              color: Color(0xff108885),
+                              color: GREEN_COLOR,
                             ),
                             SizedBox(
                               width: 5,
@@ -82,20 +111,25 @@ class _LoadingPageState extends State<LoadingPage> {
                   child: Container(
                     clipBehavior: Clip.hardEdge,
                     decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff108885))),
+                        border: Border.all(color: GREEN_COLOR)),
                     child: IconButton(
-                        color: Color(0xff108885),
+                        color: GREEN_COLOR,
                         icon: Icon(Icons.menu),
-                        onPressed: () {}),
+                        onPressed: () {
+                          setState(() {
+                            (boolChecker.menuDropDowm == false)
+                                ? boolChecker.boolChanger2(true)
+                                : boolChecker.boolChanger2(false);
+                          });
+                        }),
                   ),
                 ),
               ),
             ),
           ],
           leading: Padding(
-            padding: EdgeInsets.fromLTRB(15, 10, 0, 0),
-            child: Image.network(
-                'https://www.coronatracker.com/_nuxt/img/262cfac.png'),
+            padding: EdgeInsets.fromLTRB(14, 10, 0, 0),
+            child: Image.asset('assets/logopng.png'),
           ),
           backgroundColor: Colors.white,
           title: Padding(
@@ -111,7 +145,7 @@ class _LoadingPageState extends State<LoadingPage> {
               TextSpan(
                   text: 'Tracker',
                   style: TextStyle(
-                      color: Colors.red,
+                      color: DARK_RED_LIGHT,
                       fontSize: 20,
                       fontWeight: FontWeight.bold))
             ])),

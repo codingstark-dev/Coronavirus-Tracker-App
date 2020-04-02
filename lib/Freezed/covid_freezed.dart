@@ -29,4 +29,6 @@ abstract class AllCountry with _$AllCountry {
 
   factory AllCountry.fromJson(Map<String, dynamic> json) =>
       _$AllCountryFromJson(json);
+
+
 }
