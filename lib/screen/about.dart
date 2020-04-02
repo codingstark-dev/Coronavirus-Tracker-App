@@ -21,7 +21,7 @@ class AboutMe extends StatelessWidget {
               radius: 55,
               child: ClipOval(
                 child: Image.network(
-                  'https://www.huzaifamustafa.com/assets/img/me.jpeg',
+                  'https://i.pinimg.com/280x280_RS/6f/a3/f0/6fa3f0aab168cf13d062f9df566c6c3c.jpg',
                   height: 100,
                   width: 100,
                   fit: BoxFit.contain,
