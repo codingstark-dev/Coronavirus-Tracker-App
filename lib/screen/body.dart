@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/constant/allConstant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
+import 'package:coronatracker/screen/graph1.dart';
 import 'package:coronatracker/widget/dropdown_search.dart';
 import 'package:coronatracker/Service_Locator/locator.dart';
 import 'package:coronatracker/widget/menudropdown.dart';
@@ -27,17 +30,18 @@ class _BodyContainerState extends State<BodyContainer> {
   bool menuDrop = false;
   RegExp reg = new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
 
-  final _pageController = PageController();
+  // final _pageController = PageController();
   ScrollController _scrollController1;
   ScrollController _scrollController2;
   ScrollController _scrollController3;
   ScrollController _scrollController4;
   final _scrollControllerGroup = LinkedScrollControllerGroup();
   bool showall = false;
+
   @override
   void dispose() {
     // Don't forget to dispose all of your controllers!
-    _pageController.dispose();
+    // _pageController.dispose();
     _scrollController1.dispose();
     _scrollController2.dispose();
     _scrollController3.dispose();
@@ -60,7 +64,8 @@ class _BodyContainerState extends State<BodyContainer> {
   Function mathFunc = (Match match) => '${match[1]},';
 
   Future updateAllCountry() async {
-    final dynamic data = await sl.get<ApiData>().getVirusData();
+    final dynamic data =
+        await sl.get<ApiData>().getVirusData('global');
     // final dynamic pros = sl.get<BoolChecker>();
     final BoolChecker boolChecker =
         Provider.of<BoolChecker>(context, listen: false);
@@ -87,7 +92,8 @@ class _BodyContainerState extends State<BodyContainer> {
   }
 
   void updateAllCountrsss() async {
-    final dynamic data = await sl.get<ApiData>().getAllCountryData();
+    final dynamic data =
+        await sl.get<ApiData>().getVirusData('country');
     // print(data);
     setState(() {
       // print(i);
@@ -102,6 +108,7 @@ class _BodyContainerState extends State<BodyContainer> {
       final dataa = lol.toJson();
       allCountry = AllCountry.fromJson(dataa);
       // print(allCountry.confirmed);
+      return allCountry;
     });
   }
 
@@ -153,8 +160,24 @@ class _BodyContainerState extends State<BodyContainer> {
                           children: <Widget>[
                             Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: Image.asset(
-                                    'assets/w2560-webp/${allCountry?.countryCode[index]['countryCode'].toString().toLowerCase()}.webp')),
+                                child: Image.asset((allCountry
+                                                ?.countryCode[index]
+                                                    ['countryCode']
+                                                .toString()
+                                                .toLowerCase() ==
+                                            null ||
+                                        allCountry?.countryCode[index]
+                                                    ['countryCode']
+                                                .toString()
+                                                .toLowerCase() ==
+                                            'null' ||
+                                        allCountry?.countryCode[index]
+                                                    ['countryCode']
+                                                .toString()
+                                                .toLowerCase() ==
+                                            '')
+                                    ? 'assets/h20-webp/lols.webp'
+                                    : 'assets/h20-webp/${allCountry?.countryCode[index]['countryCode'].toString().toLowerCase()}.webp')),
                             Text(
                               "${allCountry.country[index]['country']}"
                                   .replaceAllMapped(reg, mathFunc),
@@ -440,7 +463,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                                   .center,
                                           mainAxisAlignment:
                                               MainAxisAlignment
-                                                  .spaceEvenly,
+                                                  .spaceAround,
                                           children: <Widget>[
                                             (checker.country?.countryFlag ==
                                                         null ||
@@ -455,7 +478,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                                     size: 20,
                                                   )
                                                 : Image.asset(
-                                                    'assets/w2560-webp/${checker.country.countryFlag.toString().toLowerCase()}.webp',
+                                                    'assets/h20-webp/${checker.country.countryFlag.toString().toLowerCase()}.webp',
                                                     height: 20,
                                                     width: 25,
                                                     cacheHeight: 20,
@@ -483,7 +506,34 @@ class _BodyContainerState extends State<BodyContainer> {
                                                             FontWeight
                                                                 .bold)),
                                             SizedBox(
-                                              width: 120,
+                                              width: checker.country.countryName
+                                                          .length
+                                                          .toDouble() <=
+                                                      5
+                                                  ? checker
+                                                          .country
+                                                          .countryName
+                                                          .length
+                                                          .toDouble() *
+                                                      25
+                                                  : checker
+                                                              .country
+                                                              .countryName
+                                                              .length
+                                                              .toDouble() >=
+                                                          10
+                                                      ? checker
+                                                              .country
+                                                              .countryName
+                                                              .length
+                                                              .toDouble() *
+                                                          2
+                                                      : checker
+                                                              .country
+                                                              .countryName
+                                                              .length
+                                                              .toDouble() *
+                                                          10,
                                             ),
                                             Icon(Icons
                                                 .keyboard_arrow_down)
@@ -502,7 +552,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                         child: FutureBuilder(
                                           future: sl
                                               .get<ApiData>()
-                                              .getAllCountryData(),
+                                              .getVirusData('global'),
                                           builder: (BuildContext
                                                   context,
                                               AsyncSnapshot<dynamic>
@@ -535,7 +585,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                 ? FutureBuilder(
                                     future: sl
                                         .get<ApiData>()
-                                        .getVirusData(),
+                                        .getVirusData('global'),
                                     builder: (BuildContext context,
                                         AsyncSnapshot<dynamic>
                                             snapshot) {
@@ -827,8 +877,9 @@ class _BodyContainerState extends State<BodyContainer> {
                       child: PageView(
                         children: <Widget>[
                           FutureBuilder(
-                            future:
-                                sl.get<ApiData>().getAllCountryData(),
+                            future: sl
+                                .get<ApiData>()
+                                .getVirusData('country'),
                             builder: (BuildContext context,
                                 AsyncSnapshot<dynamic> snapshot) {
                               if (snapshot.hasData) {

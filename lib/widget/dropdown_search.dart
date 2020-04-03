@@ -14,28 +14,34 @@ class DropDownWidget extends StatefulWidget {
       @required this.countrySelect,
       @required this.buttonAction})
       : super(key: key);
+
+  final Function buttonAction;
   final List countryCode;
   final List countrySelect;
-  final Function buttonAction;
+
   @override
   _DropDownWidgetState createState() => _DropDownWidgetState();
 }
 
 class _DropDownWidgetState extends State<DropDownWidget> {
-  final _scrollControllerGroup = LinkedScrollControllerGroup();
-  String valuess;
-  ScrollController _scrollController2;
-  Function mathFunc = (Match match) => '${match[1]},';
-  RegExp reg = new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
   List datata = [];
+  RegExp reg = new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+  String valuess;
+
+  ScrollController _scrollController2;
+  final _scrollControllerGroup = LinkedScrollControllerGroup();
+
   @override
   void initState() {
     super.initState();
     _scrollController2 = _scrollControllerGroup.addAndGet();
   }
 
+  Function mathFunc = (Match match) => '${match[1]},';
+
   Future updateAllCountry() async {
-    final dynamic data = await sl.get<ApiData>().getVirusData();
+    final dynamic data =
+        await sl.get<ApiData>().getVirusData('country');
     // final dynamic pros = sl.get<BoolChecker>();
     final BoolChecker boolChecker =
         Provider.of<BoolChecker>(context, listen: false);
@@ -172,7 +178,22 @@ class _DropDownWidgetState extends State<DropDownWidget> {
                                               const EdgeInsets.all(
                                                   5.0),
                                           child: Image.asset(
-                                            'assets/w2560-webp/${widget.countryCode[index]['countryCode'].toString().toLowerCase()}.webp',
+                                            (widget.countryCode[index]
+                                                            [
+                                                            'countryCode'] ==
+                                                        null ||
+                                                    widget.countryCode[
+                                                                index]
+                                                            [
+                                                            'countryCode'] ==
+                                                        'null' ||
+                                                    widget.countryCode[
+                                                                index]
+                                                            [
+                                                            'countryCode'] ==
+                                                        '')
+                                                ? 'assets/h20-webp/lols.webp'
+                                                : 'assets/h20-webp/${widget.countryCode[index]['countryCode'].toString().toLowerCase()}.webp',
                                             height: 10,
                                             width: 20,
                                             cacheHeight: 10,
@@ -228,7 +249,25 @@ class _DropDownWidgetState extends State<DropDownWidget> {
                                               const EdgeInsets.all(
                                                   5.0),
                                           child: Image.asset(
-                                            'assets/w2560-webp/${checker.allCountry.countryCode[index]['countryCode'].toString().toLowerCase()}.webp',
+                                            (checker.allCountry.countryCode[
+                                                                index]
+                                                            [
+                                                            'countryCode'] ==
+                                                        null ||
+                                                    checker.allCountry
+                                                                    .countryCode[
+                                                                index]
+                                                            [
+                                                            'countryCode'] ==
+                                                        'null' ||
+                                                    checker.allCountry
+                                                                    .countryCode[
+                                                                index]
+                                                            [
+                                                            'countryCode'] ==
+                                                        '')
+                                                ? 'assets/h20-webp/lols.webp'
+                                                : 'assets/h20-webp/${checker.allCountry.countryCode[index]['countryCode'].toString().toLowerCase()}.webp',
                                             height: 10,
                                             width: 20,
                                             cacheHeight: 10,

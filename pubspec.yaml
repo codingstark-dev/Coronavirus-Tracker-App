@@ -34,6 +34,8 @@ dependencies:
   fluttertoast: ^4.0.1
   firebase_analytics:
   firebase_messaging: ^6.0.13
+  fl_chart: ^0.8.7
+  charts_flutter: ^0.9.0
 
 
 dev_dependencies:
@@ -61,7 +63,7 @@ flutter:
     - assets/logopng.png
     - assets/flare/lolllld.flr
     - assets/images/
-    - assets/w2560-webp/
+    - assets/h20-webp/
     - assets/tenor.gif
     - assets/coronagif.gif
   # An image asset can refer to one or more resolution-specific "variants", see
