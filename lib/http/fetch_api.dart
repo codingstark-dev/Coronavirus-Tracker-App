@@ -2,6 +2,8 @@ import 'package:coronatracker/http/api.dart';
 import 'package:flutter/foundation.dart';
 
 class ApiData with ChangeNotifier {
+
+  
   Future getVirusData(String data) async {
     //fetching data from API
     NetworkAPI networkAPI = NetworkAPI(

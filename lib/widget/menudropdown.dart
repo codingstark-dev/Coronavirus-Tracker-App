@@ -17,7 +17,7 @@ class MenuDropDownTopBar extends StatefulWidget {
 class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
   @override
   Widget build(BuildContext context) {
-    final BoolChecker boolChecker = Provider.of<BoolChecker>(context);
+    final DataState dataState = Provider.of<DataState>(context);
 
     return Container(
       decoration: BoxDecoration(boxShadow: <BoxShadow>[
@@ -39,9 +39,9 @@ class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
               height: 31,
               child: FlatButton(
                   onPressed: () {
-                    boolChecker.menuDropDowm == false
-                        ? boolChecker.boolChanger2(true)
-                        : boolChecker.boolChanger2(false);
+                    dataState.menuDropDowm == false
+                        ? dataState.boolChanger2(true)
+                        : dataState.boolChanger2(false);
                   },
                   child: Text(
                     "Home",

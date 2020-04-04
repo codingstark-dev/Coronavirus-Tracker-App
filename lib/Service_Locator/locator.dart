@@ -10,7 +10,7 @@ void serviceLocator() async {
   sl.registerLazySingleton(() => Country());
   sl.registerLazySingleton(() => AllCountry());
   sl.registerLazySingleton(() => ApiData());
-  sl.registerLazySingleton(() => BoolChecker());
+  sl.registerLazySingleton(() => DataState());
   sl.registerLazySingleton(() => AnalyticsService());
 
 }

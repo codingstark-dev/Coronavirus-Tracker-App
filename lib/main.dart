@@ -1,5 +1,6 @@
 import 'package:coronatracker/Service_Locator/locator.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
+import 'package:coronatracker/http/fetch_api.dart';
 import 'package:coronatracker/provider/boolstates.dart';
 import 'package:coronatracker/screen/body.dart';
 import 'package:coronatracker/screen/loading.dart';
@@ -15,9 +16,10 @@ import 'package:coronatracker/named_route.dart' as router;
 
 void main() {
   serviceLocator();
-  runApp(MaterialApp(navigatorObservers: [
-    sl<AnalyticsService>().getAnalyticsObserver()
-  ],
+  runApp(MaterialApp(
+    navigatorObservers: [
+      sl<AnalyticsService>().getAnalyticsObserver()
+    ],
     onGenerateRoute: router.generateRoute,
     initialRoute: HomeViewRoute,
     debugShowCheckedModeBanner: false,
@@ -27,8 +29,11 @@ void main() {
               create: (_) => ConnectivityService()
                   .connectionStatusController
                   .stream),
-          ChangeNotifierProvider<BoolChecker>(
-            create: (context) => BoolChecker(),
+          ChangeNotifierProvider<DataState>(
+            create: (context) => DataState(),
+          ),
+          ChangeNotifierProvider<ApiData>(
+            create: (context) => ApiData(),
           )
         ],
         child: FutureBuilder(
@@ -54,7 +59,7 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
-    final BoolChecker boolChecker = Provider.of<BoolChecker>(context);
+    final DataState dataState = Provider.of<DataState>(context);
 
     return Scaffold(
       appBar: PreferredSize(
@@ -117,9 +122,9 @@ class _LoadingPageState extends State<LoadingPage> {
                         icon: Icon(Icons.menu),
                         onPressed: () {
                           setState(() {
-                            (boolChecker.menuDropDowm == false)
-                                ? boolChecker.boolChanger2(true)
-                                : boolChecker.boolChanger2(false);
+                            (dataState.menuDropDowm == false)
+                                ? dataState.boolChanger2(true)
+                                : dataState.boolChanger2(false);
                           });
                         }),
                   ),

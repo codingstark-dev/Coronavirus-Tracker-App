@@ -41,14 +41,15 @@ class _DropDownWidgetState extends State<DropDownWidget> {
 
   Future updateAllCountry() async {
     final dynamic data =
-        await sl.get<ApiData>().getVirusData('country');
+        await sl.get<ApiData>().getVirusData('global');
     // final dynamic pros = sl.get<BoolChecker>();
-    final BoolChecker boolChecker =
-        Provider.of<BoolChecker>(context, listen: false);
+    final ApiData datas = Provider.of<ApiData>(context);
+    final DataState boolChecker =
+        Provider.of<DataState>(context, listen: false);
     // pros.lol.clear();
     boolChecker.lol.clear();
     setState(() {
-      boolChecker.datachanged(data);
+      boolChecker.datachanged(datas.getVirusData('global'));
     });
     boolChecker.apidatatass(0);
     boolChecker.boolChanger(false);
@@ -71,8 +72,8 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   @override
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context).devicePixelRatio;
-    final BoolChecker checker =
-        Provider.of<BoolChecker>(context, listen: true);
+    final DataState checker =
+        Provider.of<DataState>(context, listen: true);
 
     return Card(
       margin: EdgeInsets.all(1),
