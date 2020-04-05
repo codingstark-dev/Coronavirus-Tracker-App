@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/constant/allConstant.dart';
+import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
 import 'package:coronatracker/widget/dropdown_search.dart';
 import 'package:coronatracker/Service_Locator/locator.dart';
@@ -27,6 +28,10 @@ class _BodyContainerState extends State<BodyContainer> {
   AllCountry allCountry;
   bool menuDrop = false;
   RegExp reg = new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+  bool showall = false;
+  bool ssssss = false;
+  Timer timer;
+  Timer timer2;
 
   // final _pageController = PageController();
   ScrollController _scrollController1;
@@ -34,10 +39,7 @@ class _BodyContainerState extends State<BodyContainer> {
   ScrollController _scrollController3;
   ScrollController _scrollController4;
   final _scrollControllerGroup = LinkedScrollControllerGroup();
-  bool showall = false;
-  bool ssssss = false;
-  Timer timer;
-  Timer timer2;
+
   @override
   void dispose() {
     timer?.cancel();
@@ -329,7 +331,8 @@ class _BodyContainerState extends State<BodyContainer> {
                 decoration: BoxDecoration(
                     border: Border.all(color: Color(0xffe2e8f0))),
                 child: Text(
-                  "${allCountry?.death[index]['totalDeaths']}",
+                  "${allCountry?.death[index]['totalDeaths']}"
+                      .replaceAllMapped(reg, mathFunc),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               );
@@ -338,18 +341,6 @@ class _BodyContainerState extends State<BodyContainer> {
         ),
       ],
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final query = MediaQuery.of(context).devicePixelRatio;
-    final DataState checker =
-        Provider.of<DataState>(context, listen: true);
-    ConnectivityStatus connectionStatus =
-        Provider.of<ConnectivityStatus>(context);
-    print(connectionStatus);
-    // print(checker.country?.confirmed);
-    return buildColumn(checker, query);
   }
 
   buildColumn(DataState checker, double query) {
@@ -782,6 +773,8 @@ class _BodyContainerState extends State<BodyContainer> {
                                   ),
                                   InkWell(
                                     onTap: () {
+                                      Navigator.pushNamed(
+                                          context, DetailPageCountry);
                                       Fluttertoast.showToast(
                                           msg:
                                               'This Feature Will Come Soon And Stay Tune!');
@@ -845,7 +838,6 @@ class _BodyContainerState extends State<BodyContainer> {
                               InkWell(
                                 onTap: ssssss == false
                                     ? () {
-                                      
                                         updateAllCountrsss();
                                       }
                                     : null,
@@ -987,5 +979,17 @@ class _BodyContainerState extends State<BodyContainer> {
         }
       },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final query = MediaQuery.of(context).devicePixelRatio;
+    final DataState checker =
+        Provider.of<DataState>(context, listen: true);
+    ConnectivityStatus connectionStatus =
+        Provider.of<ConnectivityStatus>(context);
+    print(connectionStatus);
+    // print(checker.country?.confirmed);
+    return buildColumn(checker, query);
   }
 }

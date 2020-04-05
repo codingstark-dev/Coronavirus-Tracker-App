@@ -2,14 +2,13 @@ import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:flutter/foundation.dart';
 
 class DataState with ChangeNotifier {
+  AllCountry allCountry;
+  Country country;
+  List lol = [];
+  List lolee = [];
   bool menuDown = false;
   bool menuDropDowm = false;
 
-  List lol = [];
-  List lolee = [];
-  Country country;
-
-  AllCountry allCountry;
   List datachanged(ss) {
     lol.add(ss);
     notifyListeners();
@@ -35,9 +34,9 @@ class DataState with ChangeNotifier {
   }
 
   void apidatata2(int i) {
-    final data = lolee.where((element) =>
-        element[0]['country'].toString().contains('World'));
-    print(data.toList().indexOf(0));
+    // final data = lolee.where((element) =>
+    //     element[0]['country'].toString().contains('World'));
+    // print(data.toList().indexOf(0));
     final dynamic los = AllCountry(
         countryCode: lolee[i],
         country: lolee[i],

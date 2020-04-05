@@ -43,13 +43,13 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     final dynamic data =
         await sl.get<ApiData>().getVirusData('global');
     // final dynamic pros = sl.get<BoolChecker>();
-    final ApiData datas = Provider.of<ApiData>(context);
+    final datas = await sl.get<ApiData>().getVirusData('global');
     final DataState boolChecker =
         Provider.of<DataState>(context, listen: false);
     // pros.lol.clear();
     boolChecker.lol.clear();
     setState(() {
-      boolChecker.datachanged(datas.getVirusData('global'));
+      boolChecker.datachanged(datas);
     });
     boolChecker.apidatatass(0);
     boolChecker.boolChanger(false);
