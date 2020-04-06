@@ -23,8 +23,7 @@ class _DetailPageState extends State<DetailPage> {
                 child: AppBar(
                   actions: <Widget>[
                     Padding(
-                      padding:
-                          const EdgeInsets.fromLTRB(5.0, 12, 8, 5),
+                      padding: const EdgeInsets.fromLTRB(5.0, 12, 8, 5),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,8 +46,7 @@ class _DetailPageState extends State<DetailPage> {
                                         style: TextStyle(
                                             color: GREEN_COLOR,
                                             fontSize: 20,
-                                            fontWeight:
-                                                FontWeight.bold)),
+                                            fontWeight: FontWeight.bold)),
                                     Icon(
                                       Icons.keyboard_arrow_down,
                                       color: GREEN_COLOR,
@@ -65,8 +63,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.fromLTRB(2.0, 13, 8, 5),
+                      padding: const EdgeInsets.fromLTRB(2.0, 13, 8, 5),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(2),
                         child: SizedBox(
@@ -75,8 +72,7 @@ class _DetailPageState extends State<DetailPage> {
                           child: Container(
                             clipBehavior: Clip.hardEdge,
                             decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: GREEN_COLOR)),
+                                border: Border.all(color: GREEN_COLOR)),
                             child: IconButton(
                                 color: GREEN_COLOR,
                                 icon: Icon(Icons.menu),
@@ -84,8 +80,7 @@ class _DetailPageState extends State<DetailPage> {
                                   setState(() {
                                     (dataState.menuDropDowm == false)
                                         ? dataState.boolChanger2(true)
-                                        : dataState
-                                            .boolChanger2(false);
+                                        : dataState.boolChanger2(false);
                                   });
                                 }),
                           ),
@@ -121,13 +116,129 @@ class _DetailPageState extends State<DetailPage> {
               ),
               body: Column(
                 children: <Widget>[
-                  SizedBox(height: 50,
-                                      child: Card(
-                      child: Row(
-                        children: <Widget>[],
+                  SizedBox(
+                    width: 370,
+                    height: 140,
+                    child: Card(
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Image.asset('assets/h20-webp/us.webp'),
+                              ),
+                              Text(
+                                "United States Overview",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Column(
+                                    children: <Widget>[
+                                      Text(
+                                        "336,851",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: DARK_RED_LIGHT),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        "Confirmed",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: DARK_GREY),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        "+233 new cases",
+                                        style: TextStyle(color: DARK_RED_LIGHT),
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Text(
+                                        "17,977",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: Color(0xff38a169)),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        "Recovered",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: DARK_GREY),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    children: <Widget>[
+                                      Text(
+                                        "9,620",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                            color: DARK_GREY),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        "Deaths",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: DARK_GREY),
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        "+8 new deaths",
+                                        style: TextStyle(color: DARK_GREY),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );

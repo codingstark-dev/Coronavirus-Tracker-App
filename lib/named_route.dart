@@ -2,6 +2,7 @@ import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/screen/about.dart';
 import 'package:coronatracker/screen/country_details.dart';
 import 'package:coronatracker/screen/loading.dart';
+import 'package:coronatracker/screen/page/faq.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -12,6 +13,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AboutMe());
     case DetailPageCountry:
       return MaterialPageRoute(builder: (context) => DetailPage());
+    case FAQSpage:
+      return MaterialPageRoute(builder: (context) => FAQPage());
     default:
       return MaterialPageRoute(builder: (context) => LoadingPAgee());
   }

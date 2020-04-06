@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'package:coronatracker/enums/connectivity_status.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'news.dart';
+
 class BodyContainer extends StatefulWidget {
   BodyContainer({Key key}) : super(key: key);
 
@@ -73,8 +75,7 @@ class _BodyContainerState extends State<BodyContainer> {
   Function mathFunc = (Match match) => '${match[1]},';
 
   Future updateAllCountry() async {
-    final dynamic data =
-        await sl.get<ApiData>().getVirusData('global');
+    final dynamic data = await sl.get<ApiData>().getVirusData('global');
     // final dynamic pros = sl.get<BoolChecker>();
     final datas = await sl.get<ApiData>().getVirusData('global');
     final DataState boolChecker =
@@ -102,8 +103,7 @@ class _BodyContainerState extends State<BodyContainer> {
   }
 
   Future updateAllCountrsss() async {
-    final dynamic data =
-        await sl.get<ApiData>().getVirusData('country');
+    final dynamic data = await sl.get<ApiData>().getVirusData('country');
     // print(data);
     setState(() {
       // print(i);
@@ -128,16 +128,15 @@ class _BodyContainerState extends State<BodyContainer> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffe2e8f0))),
+          decoration:
+              BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
           width: 100,
           height: 30,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
             child: Text(
               "$title",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500, fontSize: 13),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
               textAlign: TextAlign.center,
             ),
           ),
@@ -152,8 +151,8 @@ class _BodyContainerState extends State<BodyContainer> {
               return Container(
                 width: 100,
                 height: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xffe2e8f0))),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
                 child: Container(
                   color: GREY_LIGHT,
                   child: Padding(
@@ -191,8 +190,7 @@ class _BodyContainerState extends State<BodyContainer> {
                             Text(
                               "${allCountry.country[index]['country']}"
                                   .replaceAllMapped(reg, mathFunc),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(fontWeight: FontWeight.w500),
                             )
                           ],
                         ),
@@ -214,16 +212,15 @@ class _BodyContainerState extends State<BodyContainer> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffe2e8f0))),
+          decoration:
+              BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
           width: 100,
           height: 30,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
             child: Text(
               "$title",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500, fontSize: 13),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
               textAlign: TextAlign.center,
             ),
           ),
@@ -238,8 +235,8 @@ class _BodyContainerState extends State<BodyContainer> {
                 alignment: Alignment.center,
                 width: 100,
                 height: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xffe2e8f0))),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
                 child: Text(
                   "${allCountry?.confirmed[index]['totalConfirmed']}"
                       .replaceAllMapped(reg, mathFunc),
@@ -259,16 +256,15 @@ class _BodyContainerState extends State<BodyContainer> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffe2e8f0))),
+          decoration:
+              BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
           width: 100,
           height: 30,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
             child: Text(
               "$title",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500, fontSize: 13),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
               textAlign: TextAlign.center,
             ),
           ),
@@ -283,8 +279,8 @@ class _BodyContainerState extends State<BodyContainer> {
                 alignment: Alignment.center,
                 width: 100,
                 height: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xffe2e8f0))),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
                 child: Text(
                   "${allCountry.recover[index]['totalRecovered']}"
                       .replaceAllMapped(reg, mathFunc),
@@ -304,16 +300,15 @@ class _BodyContainerState extends State<BodyContainer> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Color(0xffe2e8f0))),
+          decoration:
+              BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
           width: 100,
           height: 30,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 6, 0, 0),
             child: Text(
               "$title",
-              style: TextStyle(
-                  fontWeight: FontWeight.w500, fontSize: 13),
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
               textAlign: TextAlign.center,
             ),
           ),
@@ -328,8 +323,8 @@ class _BodyContainerState extends State<BodyContainer> {
                 alignment: Alignment.center,
                 width: 100,
                 height: 40,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Color(0xffe2e8f0))),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
                 child: Text(
                   "${allCountry?.death[index]['totalDeaths']}"
                       .replaceAllMapped(reg, mathFunc),
@@ -346,8 +341,7 @@ class _BodyContainerState extends State<BodyContainer> {
   buildColumn(DataState checker, double query) {
     return FutureBuilder(
       future: sl.get<ApiData>().getVirusData('global'),
-      builder:
-          (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.hasData) {
           return Column(
             children: <Widget>[
@@ -369,17 +363,13 @@ class _BodyContainerState extends State<BodyContainer> {
                           elevation: 1.8,
                           child: SizedBox(
                             width: 1000 / query,
-                            height: (checker.menuDown == false)
-                                ? 330
-                                : 500,
+                            height: (checker.menuDown == false) ? 330 : 500,
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  15.0, 0, 15, 0),
+                              padding:
+                                  const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
                               child: Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   SizedBox(
                                     height: 20,
@@ -392,8 +382,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                         child: FlareActor(
                                             'assets/flare/lolllld.flr',
                                             fit: BoxFit.contain,
-                                            alignment:
-                                                Alignment.center,
+                                            alignment: Alignment.center,
                                             animation: "Untitled"),
                                       ),
                                       Text(
@@ -401,8 +390,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                         style: TextStyle(
                                             color: DARK_RED_LIGHT,
                                             fontSize: 15,
-                                            fontWeight:
-                                                FontWeight.bold),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(
                                         width: 140,
@@ -410,10 +398,8 @@ class _BodyContainerState extends State<BodyContainer> {
                                       Expanded(
                                         flex: 2,
                                         child: FlatButton.icon(
-                                            hoverColor:
-                                                Colors.blueAccent,
-                                            onPressed: () =>
-                                                updateAllCountry(),
+                                            hoverColor: Colors.blueAccent,
+                                            onPressed: () => updateAllCountry(),
                                             icon: Icon(
                                               Icons.refresh,
                                               color: Colors.green,
@@ -423,9 +409,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                               style: TextStyle(
                                                   color: Colors.green,
                                                   fontSize: 15,
-                                                  fontWeight:
-                                                      FontWeight
-                                                          .bold),
+                                                  fontWeight: FontWeight.bold),
                                             )),
                                       ),
                                       // Text(
@@ -450,33 +434,27 @@ class _BodyContainerState extends State<BodyContainer> {
                                   Stack(
                                     children: [
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.fromLTRB(
-                                                0, 8.0, 0, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 8.0, 0, 0),
                                         child: InkWell(
                                           onTap: () {
                                             setState(() {
-                                              (checker.menuDown ==
-                                                      false)
-                                                  ? checker.menuDown =
-                                                      true
-                                                  : checker.menuDown =
-                                                      false;
+                                              (checker.menuDown == false)
+                                                  ? checker.menuDown = true
+                                                  : checker.menuDown = false;
                                             });
                                             checker.lolee.clear();
                                           },
                                           child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(
-                                                    5),
+                                                BorderRadius.circular(5),
                                             child: Container(
                                               height: 36,
                                               width: 400,
                                               color: GREY_LIGHT,
                                               child: Row(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment
-                                                        .center,
+                                                    CrossAxisAlignment.center,
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
                                                         .spaceAround,
@@ -489,18 +467,15 @@ class _BodyContainerState extends State<BodyContainer> {
                                                       ? FaIcon(
                                                           FontAwesomeIcons
                                                               .globe,
-                                                          color: Colors
-                                                              .black87,
+                                                          color: Colors.black87,
                                                           size: 20,
                                                         )
                                                       : Image.asset(
                                                           'assets/h20-webp/${checker.country.countryFlag.toString().toLowerCase()}.webp',
                                                           height: 20,
                                                           width: 25,
-                                                          cacheHeight:
-                                                              20,
-                                                          cacheWidth:
-                                                              25,
+                                                          cacheHeight: 20,
+                                                          cacheWidth: 25,
                                                         ),
                                                   (checker.country
                                                               ?.countryName ==
@@ -509,24 +484,24 @@ class _BodyContainerState extends State<BodyContainer> {
                                                           style: TextStyle(
                                                               color: Colors
                                                                   .black87,
-                                                              fontSize:
-                                                                  18,
-                                                              fontWeight: FontWeight
-                                                                  .bold))
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold))
                                                       : Text(
                                                           '${checker.country?.countryName}',
                                                           style: TextStyle(
                                                               color: Colors
                                                                   .black87,
-                                                              fontSize:
-                                                                  18,
+                                                              fontSize: 18,
                                                               fontWeight:
-                                                                  FontWeight.bold)),
+                                                                  FontWeight
+                                                                      .bold)),
                                                   SizedBox(
                                                     width: 10.0 * 10,
                                                   ),
-                                                  Icon(Icons
-                                                      .keyboard_arrow_down)
+                                                  Icon(
+                                                      Icons.keyboard_arrow_down)
                                                 ],
                                               ),
                                             ),
@@ -537,30 +512,22 @@ class _BodyContainerState extends State<BodyContainer> {
                                           ? Container()
                                           : Padding(
                                               padding:
-                                                  const EdgeInsets
-                                                          .fromLTRB(
+                                                  const EdgeInsets.fromLTRB(
                                                       0, 43, 0, 0),
                                               child: FutureBuilder(
                                                 future: sl
                                                     .get<ApiData>()
-                                                    .getVirusData(
-                                                        'global'),
-                                                builder: (BuildContext
-                                                        context,
-                                                    AsyncSnapshot<
-                                                            dynamic>
+                                                    .getVirusData('global'),
+                                                builder: (BuildContext context,
+                                                    AsyncSnapshot<dynamic>
                                                         snapshot) {
-                                                  if (snapshot
-                                                      .hasData) {
+                                                  if (snapshot.hasData) {
                                                     return DropDownWidget(
-                                                      buttonAction:
-                                                          () {},
-                                                      countryCode:
-                                                          allCountry
-                                                              .countryCode,
+                                                      buttonAction: () {},
+                                                      countryCode: allCountry
+                                                          .countryCode,
                                                       countrySelect:
-                                                          allCountry
-                                                              .country,
+                                                          allCountry.country,
                                                     );
                                                   } else {
                                                     return Center(
@@ -581,10 +548,8 @@ class _BodyContainerState extends State<BodyContainer> {
                                           future: sl
                                               .get<ApiData>()
                                               .getVirusData('global'),
-                                          builder: (BuildContext
-                                                  context,
-                                              AsyncSnapshot<dynamic>
-                                                  snapshot) {
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<dynamic> snapshot) {
                                             if (!snapshot.hasData) {
                                               return Center(
                                                 child:
@@ -593,41 +558,35 @@ class _BodyContainerState extends State<BodyContainer> {
                                             }
 
                                             return SingleChildScrollView(
-                                              scrollDirection:
-                                                  Axis.horizontal,
+                                              scrollDirection: Axis.horizontal,
                                               child: Row(
                                                 children: <Widget>[
                                                   ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                                5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     child: Card(
                                                       child: Column(
-                                                        children: <
-                                                            Widget>[
+                                                        children: <Widget>[
                                                           Container(
-                                                            alignment:
-                                                                Alignment
-                                                                    .center,
-                                                            color:
-                                                                DARK_RED,
-                                                            height:
-                                                                50,
-                                                            width:
-                                                                110,
-                                                            child:
-                                                                Text(
-                                                              '${checker.country?.confirmed}'.replaceAllMapped(reg,
-                                                                      mathFunc) ??
+                                                            alignment: Alignment
+                                                                .center,
+                                                            color: DARK_RED,
+                                                            height: 50,
+                                                            width: 110,
+                                                            child: Text(
+                                                              '${checker.country?.confirmed}'
+                                                                      .replaceAllMapped(
+                                                                          reg,
+                                                                          mathFunc) ??
                                                                   '0',
                                                               style: TextStyle(
                                                                   color:
                                                                       DARK_RED_LIGHT,
-                                                                  fontSize:
-                                                                      18,
+                                                                  fontSize: 18,
                                                                   fontWeight:
-                                                                      FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                           ),
                                                           Container(
@@ -636,17 +595,18 @@ class _BodyContainerState extends State<BodyContainer> {
                                                                       .center,
                                                               color: Color(
                                                                   0xfffed7d7),
-                                                              height:
-                                                                  40,
-                                                              width:
-                                                                  110,
-                                                              child:
-                                                                  Text(
+                                                              height: 40,
+                                                              width: 110,
+                                                              child: Text(
                                                                 'Confirmed',
                                                                 style: TextStyle(
-                                                                    color: DARK_RED_LIGHT,
-                                                                    fontSize: 14,
-                                                                    fontWeight: FontWeight.w500),
+                                                                    color:
+                                                                        DARK_RED_LIGHT,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
                                                               ))
                                                         ],
                                                       ),
@@ -654,35 +614,31 @@ class _BodyContainerState extends State<BodyContainer> {
                                                   ),
                                                   ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                                5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     child: Card(
                                                       child: Column(
-                                                        children: <
-                                                            Widget>[
+                                                        children: <Widget>[
                                                           Container(
-                                                            alignment:
-                                                                Alignment
-                                                                    .center,
+                                                            alignment: Alignment
+                                                                .center,
                                                             color: Color(
                                                                 0xfff0fff4),
-                                                            height:
-                                                                50,
-                                                            width:
-                                                                120,
-                                                            child:
-                                                                Text(
-                                                              '${checker.country?.recover}'.replaceAllMapped(reg,
-                                                                      mathFunc) ??
+                                                            height: 50,
+                                                            width: 120,
+                                                            child: Text(
+                                                              '${checker.country?.recover}'
+                                                                      .replaceAllMapped(
+                                                                          reg,
+                                                                          mathFunc) ??
                                                                   '0',
                                                               style: TextStyle(
                                                                   color: Color(
                                                                       0xff38a169),
-                                                                  fontSize:
-                                                                      18,
+                                                                  fontSize: 18,
                                                                   fontWeight:
-                                                                      FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                           ),
                                                           Container(
@@ -691,17 +647,18 @@ class _BodyContainerState extends State<BodyContainer> {
                                                                       .center,
                                                               color: Color(
                                                                   0xffc6f6d5),
-                                                              height:
-                                                                  40,
-                                                              width:
-                                                                  120,
-                                                              child:
-                                                                  Text(
+                                                              height: 40,
+                                                              width: 120,
+                                                              child: Text(
                                                                 'Recovered',
                                                                 style: TextStyle(
-                                                                    color: Color(0xff38a169),
-                                                                    fontSize: 14,
-                                                                    fontWeight: FontWeight.w500),
+                                                                    color: Color(
+                                                                        0xff38a169),
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
                                                               ))
                                                         ],
                                                       ),
@@ -709,35 +666,31 @@ class _BodyContainerState extends State<BodyContainer> {
                                                   ),
                                                   ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                                5),
+                                                        BorderRadius.circular(
+                                                            5),
                                                     child: Card(
                                                       child: Column(
-                                                        children: <
-                                                            Widget>[
+                                                        children: <Widget>[
                                                           Container(
-                                                            alignment:
-                                                                Alignment
-                                                                    .center,
+                                                            alignment: Alignment
+                                                                .center,
                                                             color: Color(
                                                                 0xfffedf2f7),
-                                                            height:
-                                                                50,
-                                                            width:
-                                                                120,
-                                                            child:
-                                                                Text(
-                                                              '${checker.country?.death}'.replaceAllMapped(reg,
-                                                                      mathFunc) ??
+                                                            height: 50,
+                                                            width: 120,
+                                                            child: Text(
+                                                              '${checker.country?.death}'
+                                                                      .replaceAllMapped(
+                                                                          reg,
+                                                                          mathFunc) ??
                                                                   '0',
                                                               style: TextStyle(
                                                                   color: Color(
                                                                       0xff718096),
-                                                                  fontSize:
-                                                                      18,
+                                                                  fontSize: 18,
                                                                   fontWeight:
-                                                                      FontWeight.bold),
+                                                                      FontWeight
+                                                                          .bold),
                                                             ),
                                                           ),
                                                           Container(
@@ -746,17 +699,18 @@ class _BodyContainerState extends State<BodyContainer> {
                                                                       .center,
                                                               color: Color(
                                                                   0xffe2e8f0),
-                                                              height:
-                                                                  40,
-                                                              width:
-                                                                  120,
-                                                              child:
-                                                                  Text(
+                                                              height: 40,
+                                                              width: 120,
+                                                              child: Text(
                                                                 'Deaths',
                                                                 style: TextStyle(
-                                                                    color: Color(0xff718096),
-                                                                    fontSize: 14,
-                                                                    fontWeight: FontWeight.w500),
+                                                                    color: Color(
+                                                                        0xff718096),
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500),
                                                               ))
                                                         ],
                                                       ),
@@ -784,8 +738,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                       'More Details',
                                       style: TextStyle(
                                           color: Color(0xff4299e1),
-                                          fontWeight:
-                                              FontWeight.bold),
+                                          fontWeight: FontWeight.bold),
                                     )),
                                   )
                                 ],
@@ -796,36 +749,142 @@ class _BodyContainerState extends State<BodyContainer> {
                         SizedBox(
                           height: 10,
                         ),
-                        InkWell(
-                          onTap: () {
-                            launch(
-                                'https://docs.google.com/forms/d/e/1FAIpQLSeIZifaTuimdpdO4GDhV5Oz35xN1xvtiLIgPN1uSLwii7dnLw/closedform');
-                          },
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                           child: Container(
-                            alignment: Alignment.topCenter,
-                            child: SizedBox(
-                              width: 1000 / query,
-                              height: 130,
-                              child: Image.asset(
-                                'assets/images/survey_mobile.png',
-                                alignment: Alignment.topCenter,
-                                filterQuality: FilterQuality.high,
-                                fit: BoxFit.contain,
+                            child: Text(
+                              ' Source: Indian Government, Mygov.in, Covid19india.org  ',
+                              style: TextStyle(
+                                  color: Color(0xffa0aec0),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => Navigator.pushNamed(context, FAQSpage),
+                          child: Container(
+                            height: 60,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 5),
+                              child: Card(
+                                elevation: 2.3,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Image.asset(
+                                            'assets/h20-webp/in.webp',
+                                            width: 20,
+                                            height: 20,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "India Covid-19 (Live Report - Beta)",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: GREEN_COLOR,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: GREEN_COLOR,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              ' FAQs By WHO -',
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Color(0xffa0aec0),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () => Navigator.pushNamed(context, FAQSpage),
+                          child: Container(
+                            height: 60,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 5),
+                              child: Card(
+                                elevation: 2.3,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "FAQs",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: GREEN_COLOR,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: GREEN_COLOR,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+
+                        // InkWell(
+                        //   onTap: () {
+                        //     launch(
+                        //         'https://docs.google.com/forms/d/e/1FAIpQLSeIZifaTuimdpdO4GDhV5Oz35xN1xvtiLIgPN1uSLwii7dnLw/closedform');
+                        //   },
+                        //   child: Container(
+                        //     alignment: Alignment.topCenter,
+                        //     child: SizedBox(
+                        //       width: 1000 / query,
+                        //       height: 130,
+                        //       child: Image.asset(
+                        //         'assets/images/survey_mobile.png',
+                        //         alignment: Alignment.topCenter,
+                        //         filterQuality: FilterQuality.high,
+                        //         fit: BoxFit.contain,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         // DropDownWidget(),
+                        ,
                         SizedBox(
-                          height: 15,
+                          height: 10,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                            mainAxisAlignment:
-                                MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Container(
                                 width: 5,
@@ -846,8 +905,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: <Widget>[
                                       Text(
                                         'COUNTRIES AFFECTED',
@@ -855,8 +913,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                         style: TextStyle(
                                             color: GREEN_COLOR,
                                             fontSize: 18,
-                                            fontWeight:
-                                                FontWeight.bold),
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       SizedBox(
                                         width: 10,
@@ -873,8 +930,7 @@ class _BodyContainerState extends State<BodyContainer> {
                           ),
                         ),
                         Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                           child: Container(
                             child: Text(
                               'Source: WHO, CDC, ECDC, NHC of the PRC, JHU CSSE, DXY, QQ, and various international media',
@@ -894,12 +950,10 @@ class _BodyContainerState extends State<BodyContainer> {
                             child: PageView(
                               children: <Widget>[
                                 FutureBuilder(
-                                  future: sl
-                                      .get<ApiData>()
-                                      .getVirusData('country'),
+                                  future:
+                                      sl.get<ApiData>().getVirusData('country'),
                                   builder: (BuildContext context,
-                                      AsyncSnapshot<dynamic>
-                                          snapshot) {
+                                      AsyncSnapshot<dynamic> snapshot) {
                                     if (snapshot.hasData) {
                                       return Row(
                                         children: <Widget>[
@@ -910,61 +964,117 @@ class _BodyContainerState extends State<BodyContainer> {
                                                   (showall == false)
                                                       ? 10
                                                       : allCountry
-                                                          .countryCode
-                                                          .length)),
+                                                          .countryCode.length)),
                                           Expanded(
                                               child: _buildcolum2(
                                                   'Confirmed',
                                                   (showall == false)
                                                       ? 10
                                                       : allCountry
-                                                          .countryCode
-                                                          .length)),
+                                                          .countryCode.length)),
                                           Expanded(
                                               child: _buildcolum3(
                                                   'Recovered',
                                                   (showall == false)
                                                       ? 10
                                                       : allCountry
-                                                          .countryCode
-                                                          .length)),
+                                                          .countryCode.length)),
                                           Expanded(
                                               child: _buildcolum4(
                                                   'Deaths',
                                                   (showall == false)
                                                       ? 10
                                                       : allCountry
-                                                          .countryCode
-                                                          .length)),
+                                                          .countryCode.length)),
                                           // Expanded(child: _buildcolum('dddd', 10)),
                                         ],
                                       );
                                     } else {
                                       return Center(
-                                        child:
-                                            CircularProgressIndicator(),
+                                        child: CircularProgressIndicator(),
                                       );
                                     }
                                   },
                                 ),
                               ],
                             )),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "* Cases identified on a cruise ship currently in Japanese territorial waters.",
+                            style: TextStyle(
+                                color: DARK_GREY, fontWeight: FontWeight.w500),
+                          ),
+                        ),
                         SizedBox(
                           height: 5,
                         ),
-                        FlatButton(
-                            textColor: Colors.blue,
-                            onPressed: () {
-                              setState(() {});
-                              showall = !showall;
-                            },
-                            child: Text(
-                              (showall == false)
-                                  ? 'Show All Country'
-                                  : 'Show Top Country',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            ))
+                        SizedBox(
+                          width: 200,
+                          height: 30,
+                          child: FlatButton(
+                              textColor: Colors.blue,
+                              onPressed: () {
+                                setState(() {});
+                                showall = !showall;
+                              },
+                              child: Text(
+                                (showall == false)
+                                    ? 'Show All Country'
+                                    : 'Show Top Country',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                width: 5,
+                                height: 40,
+                                color: GREEN_COLOR,
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              InkWell(
+                                onTap: ssssss == false
+                                    ? () {
+                                        updateAllCountrsss();
+                                      }
+                                    : null,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(7.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        'VERIFIED NEWS',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            color: GREEN_COLOR,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Icon(
+                                        Icons.refresh,
+                                        color: GREEN_COLOR,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        NewsSection()
                       ],
                     ),
                   ),
@@ -984,8 +1094,7 @@ class _BodyContainerState extends State<BodyContainer> {
   @override
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context).devicePixelRatio;
-    final DataState checker =
-        Provider.of<DataState>(context, listen: true);
+    final DataState checker = Provider.of<DataState>(context, listen: true);
     ConnectivityStatus connectionStatus =
         Provider.of<ConnectivityStatus>(context);
     print(connectionStatus);
