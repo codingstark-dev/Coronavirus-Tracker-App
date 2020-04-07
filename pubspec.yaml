@@ -37,6 +37,8 @@ dependencies:
   fl_chart: ^0.8.7
   charts_flutter: ^0.9.0
   webview_flutter: ^0.3.19+9
+  timeago: ^2.0.26
+  flutter_sparkline:
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +68,7 @@ flutter:
     - assets/h20-webp/
     - assets/tenor.gif
     - assets/coronagif.gif
+    - assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

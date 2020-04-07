@@ -29,6 +29,30 @@ abstract class AllCountry with _$AllCountry {
 
   factory AllCountry.fromJson(Map<String, dynamic> json) =>
       _$AllCountryFromJson(json);
+}
 
+@freezed
+abstract class NewsData with _$NewsData {
+  factory NewsData(
+    List<dynamic> newsdata,
+  ) = _NewsData;
 
+  @late
+  List<dynamic> get description =>
+      newsdata.map((e) => e['description']).toList();
+  @late
+  List<dynamic> get title =>
+      newsdata.map((e) => e['title']).toList();
+  @late
+  List<dynamic> get urlToImage =>
+      newsdata.map((e) => e['urlToImage']).toList();
+  @late
+  List<dynamic> get publishedAt =>
+      newsdata.map((e) => e['publishedAt']).toList();
+  @late
+  List<dynamic> get countryCode =>
+      newsdata.map((e) => e['countryCode']).toList();
+  @late
+  List<dynamic> get url =>
+      newsdata.map((e) => e['url']).toList();
 }

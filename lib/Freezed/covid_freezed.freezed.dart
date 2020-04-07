@@ -462,3 +462,195 @@ abstract class _AllCountry implements AllCountry {
   @override
   _$AllCountryCopyWith<_AllCountry> get copyWith;
 }
+
+class _$NewsDataTearOff {
+  const _$NewsDataTearOff();
+
+  _NewsData call(List<dynamic> newsdata) {
+    return _NewsData(
+      newsdata,
+    );
+  }
+}
+
+// ignore: unused_element
+const $NewsData = _$NewsDataTearOff();
+
+mixin _$NewsData {
+  List<dynamic> get newsdata;
+
+  $NewsDataCopyWith<NewsData> get copyWith;
+}
+
+abstract class $NewsDataCopyWith<$Res> {
+  factory $NewsDataCopyWith(NewsData value, $Res Function(NewsData) then) =
+      _$NewsDataCopyWithImpl<$Res>;
+  $Res call({List<dynamic> newsdata});
+}
+
+class _$NewsDataCopyWithImpl<$Res> implements $NewsDataCopyWith<$Res> {
+  _$NewsDataCopyWithImpl(this._value, this._then);
+
+  final NewsData _value;
+  // ignore: unused_field
+  final $Res Function(NewsData) _then;
+
+  @override
+  $Res call({
+    Object newsdata = freezed,
+  }) {
+    return _then(_value.copyWith(
+      newsdata:
+          newsdata == freezed ? _value.newsdata : newsdata as List<dynamic>,
+    ));
+  }
+}
+
+abstract class _$NewsDataCopyWith<$Res> implements $NewsDataCopyWith<$Res> {
+  factory _$NewsDataCopyWith(_NewsData value, $Res Function(_NewsData) then) =
+      __$NewsDataCopyWithImpl<$Res>;
+  @override
+  $Res call({List<dynamic> newsdata});
+}
+
+class __$NewsDataCopyWithImpl<$Res> extends _$NewsDataCopyWithImpl<$Res>
+    implements _$NewsDataCopyWith<$Res> {
+  __$NewsDataCopyWithImpl(_NewsData _value, $Res Function(_NewsData) _then)
+      : super(_value, (v) => _then(v as _NewsData));
+
+  @override
+  _NewsData get _value => super._value as _NewsData;
+
+  @override
+  $Res call({
+    Object newsdata = freezed,
+  }) {
+    return _then(_NewsData(
+      newsdata == freezed ? _value.newsdata : newsdata as List<dynamic>,
+    ));
+  }
+}
+
+class _$_NewsData with DiagnosticableTreeMixin implements _NewsData {
+  _$_NewsData(this.newsdata) : assert(newsdata != null);
+
+  @override
+  final List<dynamic> newsdata;
+
+  bool _diddescription = false;
+  List<dynamic> _description;
+
+  @override
+  List<dynamic> get description {
+    if (_diddescription == false) {
+      _diddescription = true;
+      _description = newsdata.map((e) => e['description']).toList();
+    }
+    return _description;
+  }
+
+  bool _didtitle = false;
+  List<dynamic> _title;
+
+  @override
+  List<dynamic> get title {
+    if (_didtitle == false) {
+      _didtitle = true;
+      _title = newsdata.map((e) => e['title']).toList();
+    }
+    return _title;
+  }
+
+  bool _didurlToImage = false;
+  List<dynamic> _urlToImage;
+
+  @override
+  List<dynamic> get urlToImage {
+    if (_didurlToImage == false) {
+      _didurlToImage = true;
+      _urlToImage = newsdata.map((e) => e['urlToImage']).toList();
+    }
+    return _urlToImage;
+  }
+
+  bool _didpublishedAt = false;
+  List<dynamic> _publishedAt;
+
+  @override
+  List<dynamic> get publishedAt {
+    if (_didpublishedAt == false) {
+      _didpublishedAt = true;
+      _publishedAt = newsdata.map((e) => e['publishedAt']).toList();
+    }
+    return _publishedAt;
+  }
+
+  bool _didcountryCode = false;
+  List<dynamic> _countryCode;
+
+  @override
+  List<dynamic> get countryCode {
+    if (_didcountryCode == false) {
+      _didcountryCode = true;
+      _countryCode = newsdata.map((e) => e['countryCode']).toList();
+    }
+    return _countryCode;
+  }
+
+  bool _didurl = false;
+  List<dynamic> _url;
+
+  @override
+  List<dynamic> get url {
+    if (_didurl == false) {
+      _didurl = true;
+      _url = newsdata.map((e) => e['url']).toList();
+    }
+    return _url;
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NewsData(newsdata: $newsdata, description: $description, title: $title, urlToImage: $urlToImage, publishedAt: $publishedAt, countryCode: $countryCode, url: $url)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'NewsData'))
+      ..add(DiagnosticsProperty('newsdata', newsdata))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('urlToImage', urlToImage))
+      ..add(DiagnosticsProperty('publishedAt', publishedAt))
+      ..add(DiagnosticsProperty('countryCode', countryCode))
+      ..add(DiagnosticsProperty('url', url));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _NewsData &&
+            (identical(other.newsdata, newsdata) ||
+                const DeepCollectionEquality()
+                    .equals(other.newsdata, newsdata)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(newsdata);
+
+  @override
+  _$NewsDataCopyWith<_NewsData> get copyWith =>
+      __$NewsDataCopyWithImpl<_NewsData>(this, _$identity);
+}
+
+abstract class _NewsData implements NewsData {
+  factory _NewsData(List<dynamic> newsdata) = _$_NewsData;
+
+  @override
+  List<dynamic> get newsdata;
+  @override
+  _$NewsDataCopyWith<_NewsData> get copyWith;
+}

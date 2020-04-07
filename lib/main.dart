@@ -1,7 +1,9 @@
+import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/Service_Locator/locator.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/http/fetch_api.dart';
 import 'package:coronatracker/provider/boolstates.dart';
+import 'package:coronatracker/provider/newsfetch.dart';
 import 'package:coronatracker/screen/body.dart';
 import 'package:coronatracker/screen/loading.dart';
 import 'package:coronatracker/service/analytics_service.dart';
@@ -17,31 +19,23 @@ import 'package:coronatracker/named_route.dart' as router;
 void main() {
   serviceLocator();
   runApp(MaterialApp(
-    navigatorObservers: [
-      sl<AnalyticsService>().getAnalyticsObserver()
-    ],
+    navigatorObservers: [sl<AnalyticsService>().getAnalyticsObserver()],
     onGenerateRoute: router.generateRoute,
     initialRoute: HomeViewRoute,
     debugShowCheckedModeBanner: false,
     home: MultiProvider(
         providers: <SingleChildWidget>[
-          StreamProvider<ConnectivityStatus>(
-              create: (_) => ConnectivityService()
-                  .connectionStatusController
-                  .stream),
           ChangeNotifierProvider<DataState>(
             create: (context) => DataState(),
           ),
-          ChangeNotifierProvider<ApiData>(
-            create: (context) => ApiData(),
-          )
+          StreamProvider<ConnectivityStatus>(
+              create: (_) =>
+                  ConnectivityService().connectionStatusController.stream),
         ],
         child: FutureBuilder(
             future: Future.delayed(Duration(seconds: 6)),
-            builder: (BuildContext context,
-                AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.connectionState ==
-                  ConnectionState.waiting) {
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return LoadingPAgee();
               }
               return Wrapper();
@@ -115,8 +109,8 @@ class _LoadingPageState extends State<LoadingPage> {
                   width: 50,
                   child: Container(
                     clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: GREEN_COLOR)),
+                    decoration:
+                        BoxDecoration(border: Border.all(color: GREEN_COLOR)),
                     child: IconButton(
                         color: GREEN_COLOR,
                         icon: Icon(Icons.menu),
@@ -158,7 +152,14 @@ class _LoadingPageState extends State<LoadingPage> {
           elevation: 1.5,
         ),
       ),
-      body: BodyContainer(),
+      body: MultiProvider(providers: <SingleChildWidget>[
+        ChangeNotifierProvider<NewsFetch>(
+          create: (context) => NewsFetch(),
+        ),
+        ChangeNotifierProvider<ApiData>(
+          create: (context) => ApiData(),
+        )
+      ], child: BodyContainer()),
     );
   }
 }

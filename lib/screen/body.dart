@@ -4,6 +4,7 @@ import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/constant/allConstant.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
+import 'package:coronatracker/provider/newsfetch.dart';
 import 'package:coronatracker/widget/dropdown_search.dart';
 import 'package:coronatracker/Service_Locator/locator.dart';
 import 'package:coronatracker/widget/menudropdown.dart';
@@ -14,9 +15,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:coronatracker/http/fetch_api.dart';
 import 'package:provider/provider.dart';
-import 'package:coronatracker/enums/connectivity_status.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'news.dart';
 
 class BodyContainer extends StatefulWidget {
@@ -34,7 +32,7 @@ class _BodyContainerState extends State<BodyContainer> {
   bool ssssss = false;
   Timer timer;
   Timer timer2;
-
+  Timer timer3;
   // final _pageController = PageController();
   ScrollController _scrollController1;
   ScrollController _scrollController2;
@@ -59,11 +57,15 @@ class _BodyContainerState extends State<BodyContainer> {
     super.initState();
     updateAllCountry();
     updateAllCountrsss();
+    Provider.of<NewsFetch>(context, listen: false).getVirusData('100');
     timer = Timer.periodic(Duration(seconds: 30), (Timer t) {
       return updateAllCountry();
     });
     timer2 = Timer.periodic(Duration(seconds: 30), (Timer t) {
       return updateAllCountrsss();
+    });
+    timer3 = Timer.periodic(Duration(seconds: 30), (Timer t) {
+      return Provider.of<NewsFetch>(context, listen: false).getVirusData('100');
     });
     // Create separate ScrollControllers as you need them:
     _scrollController1 = _scrollControllerGroup.addAndGet();
@@ -338,7 +340,7 @@ class _BodyContainerState extends State<BodyContainer> {
     );
   }
 
-  buildColumn(DataState checker, double query) {
+  buildColumn(DataState checker, double query, NewsFetch newsData) {
     return FutureBuilder(
       future: sl.get<ApiData>().getVirusData('global'),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -777,7 +779,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                     Row(
                                       children: <Widget>[
                                         Padding(
-                                          padding: const EdgeInsets.all(4.0),
+                                          padding: const EdgeInsets.all(6.0),
                                           child: Image.asset(
                                             'assets/h20-webp/in.webp',
                                             width: 20,
@@ -1042,7 +1044,7 @@ class _BodyContainerState extends State<BodyContainer> {
                               InkWell(
                                 onTap: ssssss == false
                                     ? () {
-                                        updateAllCountrsss();
+                                        newsData.getVirusData('100');
                                       }
                                     : null,
                                 child: Padding(
@@ -1095,10 +1097,8 @@ class _BodyContainerState extends State<BodyContainer> {
   Widget build(BuildContext context) {
     final query = MediaQuery.of(context).devicePixelRatio;
     final DataState checker = Provider.of<DataState>(context, listen: true);
-    ConnectivityStatus connectionStatus =
-        Provider.of<ConnectivityStatus>(context);
-    print(connectionStatus);
+    final newsData = Provider.of<NewsFetch>(context);
     // print(checker.country?.confirmed);
-    return buildColumn(checker, query);
+    return buildColumn(checker, query, newsData);
   }
 }
