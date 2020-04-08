@@ -2,7 +2,6 @@ import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:flutter/foundation.dart';
 
 class DataState with ChangeNotifier {
-  AllCountry allCountry;
   Country country;
   List lol = [];
   List lolee = [];
@@ -15,17 +14,17 @@ class DataState with ChangeNotifier {
     return lol;
   }
 
-  void apidatata(int i) {
-    final los = Country(
-        countryFlag: lol[i]['countryCode'],
-        countryName: lol[i]['country'],
-        confirmed: lol[i]['totalConfirmed'],
-        death: lol[i]['totalDeaths'],
-        recover: lol[i]['totalRecovered']);
-    final lola = los.toJson();
-    notifyListeners();
-    country = Country.fromJson(lola);
-  }
+  // void apidatata(int i) {
+  //   final los = Country(
+  //       countryCode:  lol[i]['countryCode'],
+  //       country: lol[i]['country'],
+  //       totalConfirmed: lol[i]['totalConfirmed'],
+  //       death: lol[i]['totalDeaths'],
+  //       recover: lol[i]['totalRecovered']);
+  //   final lola = los.toJson();
+  //   notifyListeners();
+  //   country = Country.fromJson(lola);
+  // }
 
   List datachangedss(ss) {
     lolee.add(ss);
@@ -33,29 +32,29 @@ class DataState with ChangeNotifier {
     return lolee;
   }
 
-  void apidatata2(int i) {
-    // final data = lolee.where((element) =>
-    //     element[0]['country'].toString().contains('World'));
-    // print(data.toList().indexOf(0));
-    final dynamic los = AllCountry(
-        countryCode: lolee[i],
-        country: lolee[i],
-        confirmed: lolee[i],
-        death: lolee[i],
-        recover: lolee[i]);
-    final lola = los.toJson();
-    notifyListeners();
-    allCountry = AllCountry.fromJson(lola);
-    // lolee = los;
-  }
+  // void apidatata2(int i) {
+  //   // final data = lolee.where((element) =>
+  //   //     element[0]['country'].toString().contains('World'));
+  //   // print(data.toList().indexOf(0));
+  //   final dynamic los = AllCountry(
+  //       countryCode: lolee[i],
+  //       country: lolee[i],
+  //       confirmed: lolee[i],
+  //       death: lolee[i],
+  //       recover: lolee[i]);
+  //   final lola = los.toJson();
+  //   notifyListeners();
+  //   allCountry = AllCountry.fromJson(lola);
+  //   // lolee = los;
+  // }
 
   void apidatatass(int i) {
     final los = Country(
-        countryFlag: lol[0]['countryCode'],
-        countryName: lol[0]['country'],
-        confirmed: lol[0]['totalConfirmed'],
-        death: lol[0]['totalDeaths'],
-        recover: lol[0]['totalRecovered']);
+        countryCode: lol[0]['countryCode'],
+        country: lol[0]['country'],
+        totalConfirmed: lol[0]['totalConfirmed'],
+        totalDeaths: lol[0]['totalDeaths'],
+        totalRecovered: lol[0]['totalRecovered']);
     final lola = los.toJson();
     notifyListeners();
     country = Country.fromJson(lola);
@@ -71,8 +70,8 @@ class DataState with ChangeNotifier {
   //   // datachanged(data);
   //   // apidatatass(0);
   //   final los = Country(
-  //       countryFlag: lol[0]['countryCode'],
-  //       countryName: lol[0]['country'],
+  //       countryCode: lol[0]['countryCode'],
+  //       country: lol[0]['country'],
   //       confirmed: lol[0]['totalConfirmed'],
   //       death: lol[0]['totalDeaths'],
   //       recover: lol[0]['totalRecovered']);

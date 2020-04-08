@@ -4,6 +4,8 @@ import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/constant/allConstant.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
+import 'package:coronatracker/provider/getGlobal.dart';
+import 'package:coronatracker/provider/getsinglereport.dart';
 import 'package:coronatracker/provider/newsfetch.dart';
 import 'package:coronatracker/widget/dropdown_search.dart';
 import 'package:coronatracker/Service_Locator/locator.dart';
@@ -25,7 +27,7 @@ class BodyContainer extends StatefulWidget {
 }
 
 class _BodyContainerState extends State<BodyContainer> {
-  AllCountry allCountry;
+  // AllCountry allCountry;
   bool menuDrop = false;
   RegExp reg = new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
   bool showall = false;
@@ -33,6 +35,7 @@ class _BodyContainerState extends State<BodyContainer> {
   Timer timer;
   Timer timer2;
   Timer timer3;
+
   // final _pageController = PageController();
   ScrollController _scrollController1;
   ScrollController _scrollController2;
@@ -56,15 +59,18 @@ class _BodyContainerState extends State<BodyContainer> {
   void initState() {
     super.initState();
     updateAllCountry();
-    updateAllCountrsss();
-    Provider.of<NewsFetch>(context, listen: false).getVirusData('100');
-    timer = Timer.periodic(Duration(seconds: 30), (Timer t) {
-      return updateAllCountry();
+    // updateAllCountrsss();
+    Provider.of<SingleReport>(context, listen: false).getcountrydata();
+    // final country = Provider.of<GetGlobal>(context, listen: false);
+    Provider.of<SingleReport>(context, listen: false).getglobaldata();
+    Provider.of<NewsFetch>(context, listen: false).getVirusData('50');
+    timer = Timer.periodic(Duration(seconds: 60), (Timer t) {
+      return Provider.of<SingleReport>(context, listen: false).getglobaldata();
     });
-    timer2 = Timer.periodic(Duration(seconds: 30), (Timer t) {
-      return updateAllCountrsss();
+    timer2 = Timer.periodic(Duration(seconds: 60), (Timer t) {
+      return Provider.of<SingleReport>(context, listen: false).getcountrydata();
     });
-    timer3 = Timer.periodic(Duration(seconds: 30), (Timer t) {
+    timer3 = Timer.periodic(Duration(seconds: 60), (Timer t) {
       return Provider.of<NewsFetch>(context, listen: false).getVirusData('100');
     });
     // Create separate ScrollControllers as you need them:
@@ -77,7 +83,7 @@ class _BodyContainerState extends State<BodyContainer> {
   Function mathFunc = (Match match) => '${match[1]},';
 
   Future updateAllCountry() async {
-    final dynamic data = await sl.get<ApiData>().getVirusData('global');
+    // final dynamic data = await sl.get<ApiData>().getVirusData('global');
     // final dynamic pros = sl.get<BoolChecker>();
     final datas = await sl.get<ApiData>().getVirusData('global');
     final DataState boolChecker =
@@ -90,41 +96,40 @@ class _BodyContainerState extends State<BodyContainer> {
     boolChecker.apidatatass(0);
     // setState(() {
     //   if (data == null) {
-    //     final lol = Country(confirmed: 0, death: 0, recover: 0);
+    //     final lol = Country(totalConfirmed: 0, totalDeaths: 0, totalRecovered: 0);
     //     final dataa = lol.toJson();
     //     country = Country.fromJson(dataa);
     //   }
     //   final lol = Country(
-    //       confirmed: data['totalConfirmed'],
-    //       death: data['totalDeaths'],
-    //       recover: data['totalRecovered']);
+    //       totalConfirmed: data['totalConfirmed'],
+    //       totalDeaths: data['totalDeaths'],
+    //       totalRecovered: data['totalRecovered']);
     //   final dataa = lol.toJson();
     //   country = Country.fromJson(dataa);
-    //   print(country.confirmed);
+    //   print(country.totalConfirmed);
     // });
   }
 
-  Future updateAllCountrsss() async {
-    final dynamic data = await sl.get<ApiData>().getVirusData('country');
-    // print(data);
-    setState(() {
-      // print(i);
+  // Future updateAllCountrsss() async {
+  //   final dynamic data = await sl.get<ApiData>().getVirusData('country');
+  //   // print(data);
 
-      final lol = AllCountry(
-          // countryCode: data[i]['countryCode'],
-          confirmed: data,
-          death: data,
-          recover: data,
-          country: data,
-          countryCode: data);
-      final dataa = lol.toJson();
-      allCountry = AllCountry.fromJson(dataa);
-      // print(allCountry.confirmed);
-      return allCountry;
-    });
-  }
+  //   // print(i);
 
-  Widget _buildcolum(String title, int n) {
+  //   final lol = AllCountry(
+  //       // countryCode: data[i]['countryCode'],
+  //       totalConfirmed: data,
+  //       totalDeaths: data,
+  //       totalRecovered: data,
+  //       country: data,
+  //       countryCode: data);
+  //   final dataa = lol.toJson();
+  //   allCountry = AllCountry.fromJson(dataa);
+  //   // print(allCountry.totalConfirmed);
+  //   return allCountry;
+  // }
+
+  Widget _buildcolum(String title, int n, SingleReport singleReport) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -163,6 +168,33 @@ class _BodyContainerState extends State<BodyContainer> {
                       scrollDirection: Axis.horizontal,
                       child: InkWell(
                         onTap: () {
+                          Navigator.pushNamed(context, DetailPageCountry,
+                              arguments: Country(
+                                  activeCases: singleReport
+                                      .countryReport.activeCases[index],
+                                  dailyConfirmed: singleReport
+                                      .countryReport.dailyConfirmed[index],
+                                  dailyDeaths: singleReport
+                                      .countryReport.dailyDeaths[index],
+                                  fR: singleReport.countryReport.fR[index],
+                                  pR: singleReport.countryReport.pR[index],
+                                  lastUpdated: singleReport
+                                      .countryReport.lastUpdated[index],
+                                  totalConfirmedPerMillionPopulation: singleReport
+                                          .countryReport
+                                          .totalConfirmedPerMillionPopulation[
+                                      index],
+                                  totalCritical: singleReport
+                                      .countryReport.totalCritical[index],
+                                  totalDeathsPerMillionPopulation: singleReport
+                                      .countryReport
+                                      .totalDeathsPerMillionPopulation[index],
+                                  countryCode: singleReport.countryReport.countryCode[index],
+                                  country: singleReport.countryReport.country[index],
+                                  totalConfirmed: singleReport.countryReport.totalConfirmed[index],
+                                  totalDeaths: singleReport.countryReport.totalDeaths[index],
+                                  totalRecovered: singleReport.countryReport.totalRecovered[index]));
+                          // print(singleReport.countryReport.country[index]);
                           Fluttertoast.showToast(
                               msg:
                                   'This Feature Will Come Soon And Stay Tune!');
@@ -171,26 +203,25 @@ class _BodyContainerState extends State<BodyContainer> {
                           children: <Widget>[
                             Padding(
                                 padding: const EdgeInsets.all(4.0),
-                                child: Image.asset((allCountry
-                                                ?.countryCode[index]
-                                                    ['countryCode']
+                                child: Image.asset((singleReport.countryReport
+                                                .countryCode[index]
                                                 .toString()
                                                 .toLowerCase() ==
                                             null ||
-                                        allCountry?.countryCode[index]
-                                                    ['countryCode']
+                                        singleReport.countryReport
+                                                .countryCode[index]
                                                 .toString()
                                                 .toLowerCase() ==
                                             'null' ||
-                                        allCountry?.countryCode[index]
-                                                    ['countryCode']
+                                        singleReport.countryReport
+                                                .countryCode[index]
                                                 .toString()
                                                 .toLowerCase() ==
                                             '')
                                     ? 'assets/h20-webp/lols.webp'
-                                    : 'assets/h20-webp/${allCountry?.countryCode[index]['countryCode'].toString().toLowerCase()}.webp')),
+                                    : 'assets/h20-webp/${singleReport.countryReport.countryCode[index].toString().toLowerCase()}.webp')),
                             Text(
-                              "${allCountry.country[index]['country']}"
+                              "${singleReport.countryReport.country[index]}"
                                   .replaceAllMapped(reg, mathFunc),
                               style: TextStyle(fontWeight: FontWeight.w500),
                             )
@@ -208,7 +239,7 @@ class _BodyContainerState extends State<BodyContainer> {
     );
   }
 
-  Widget _buildcolum2(String title, int n) {
+  Widget _buildcolum2(String title, int n, SingleReport singleReport) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -240,7 +271,7 @@ class _BodyContainerState extends State<BodyContainer> {
                 decoration:
                     BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
                 child: Text(
-                  "${allCountry?.confirmed[index]['totalConfirmed']}"
+                  "${singleReport.countryReport.totalConfirmed[index]}"
                       .replaceAllMapped(reg, mathFunc),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -252,7 +283,7 @@ class _BodyContainerState extends State<BodyContainer> {
     );
   }
 
-  Widget _buildcolum3(String title, int n) {
+  Widget _buildcolum3(String title, int n, SingleReport singleReport) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -284,7 +315,7 @@ class _BodyContainerState extends State<BodyContainer> {
                 decoration:
                     BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
                 child: Text(
-                  "${allCountry.recover[index]['totalRecovered']}"
+                  "${singleReport.countryReport.totalRecovered[index]}"
                       .replaceAllMapped(reg, mathFunc),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -296,7 +327,7 @@ class _BodyContainerState extends State<BodyContainer> {
     );
   }
 
-  Widget _buildcolum4(String title, int n) {
+  Widget _buildcolum4(String title, int n, SingleReport singleReport) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -328,7 +359,7 @@ class _BodyContainerState extends State<BodyContainer> {
                 decoration:
                     BoxDecoration(border: Border.all(color: Color(0xffe2e8f0))),
                 child: Text(
-                  "${allCountry?.death[index]['totalDeaths']}"
+                  "${singleReport.countryReport.totalDeaths[index]}"
                       .replaceAllMapped(reg, mathFunc),
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -340,7 +371,8 @@ class _BodyContainerState extends State<BodyContainer> {
     );
   }
 
-  buildColumn(DataState checker, double query, NewsFetch newsData) {
+  buildColumn(DataState checker, double query, NewsFetch newsData,
+      SingleReport singleReport) {
     return FutureBuilder(
       future: sl.get<ApiData>().getVirusData('global'),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -365,7 +397,7 @@ class _BodyContainerState extends State<BodyContainer> {
                           elevation: 1.8,
                           child: SizedBox(
                             width: 1000 / query,
-                            height: (checker.menuDown == false) ? 330 : 500,
+                            height: (checker.menuDown == false) ? 330 : 540,
                             child: Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(15.0, 0, 15, 0),
@@ -401,7 +433,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                         flex: 2,
                                         child: FlatButton.icon(
                                             hoverColor: Colors.blueAccent,
-                                            onPressed: () => updateAllCountry(),
+                                            onPressed: () => singleReport.getglobaldata(),
                                             icon: Icon(
                                               Icons.refresh,
                                               color: Colors.green,
@@ -461,10 +493,11 @@ class _BodyContainerState extends State<BodyContainer> {
                                                     MainAxisAlignment
                                                         .spaceAround,
                                                 children: <Widget>[
-                                                  (checker.country?.countryFlag ==
+                                                  (singleReport.country
+                                                                  ?.countryCode ==
                                                               null ||
-                                                          checker.country
-                                                                  .countryFlag ==
+                                                          singleReport.country
+                                                                  .countryCode ==
                                                               "")
                                                       ? FaIcon(
                                                           FontAwesomeIcons
@@ -473,14 +506,14 @@ class _BodyContainerState extends State<BodyContainer> {
                                                           size: 20,
                                                         )
                                                       : Image.asset(
-                                                          'assets/h20-webp/${checker.country.countryFlag.toString().toLowerCase()}.webp',
+                                                          'assets/h20-webp/${singleReport.country.countryCode.toString().toLowerCase()}.webp',
                                                           height: 20,
                                                           width: 25,
                                                           cacheHeight: 20,
                                                           cacheWidth: 25,
                                                         ),
-                                                  (checker.country
-                                                              ?.countryName ==
+                                                  (singleReport.country
+                                                              ?.country ==
                                                           "")
                                                       ? Text('Global',
                                                           style: TextStyle(
@@ -491,7 +524,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                                                   FontWeight
                                                                       .bold))
                                                       : Text(
-                                                          '${checker.country?.countryName}',
+                                                          '${singleReport.country?.country}',
                                                           style: TextStyle(
                                                               color: Colors
                                                                   .black87,
@@ -526,10 +559,6 @@ class _BodyContainerState extends State<BodyContainer> {
                                                   if (snapshot.hasData) {
                                                     return DropDownWidget(
                                                       buttonAction: () {},
-                                                      countryCode: allCountry
-                                                          .countryCode,
-                                                      countrySelect:
-                                                          allCountry.country,
                                                     );
                                                   } else {
                                                     return Center(
@@ -577,7 +606,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                                             height: 50,
                                                             width: 110,
                                                             child: Text(
-                                                              '${checker.country?.confirmed}'
+                                                              '${singleReport.country?.totalConfirmed}'
                                                                       .replaceAllMapped(
                                                                           reg,
                                                                           mathFunc) ??
@@ -629,7 +658,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                                             height: 50,
                                                             width: 120,
                                                             child: Text(
-                                                              '${checker.country?.recover}'
+                                                              '${singleReport.country?.totalRecovered}'
                                                                       .replaceAllMapped(
                                                                           reg,
                                                                           mathFunc) ??
@@ -681,7 +710,7 @@ class _BodyContainerState extends State<BodyContainer> {
                                                             height: 50,
                                                             width: 120,
                                                             child: Text(
-                                                              '${checker.country?.death}'
+                                                              '${singleReport.country?.totalDeaths}'
                                                                       .replaceAllMapped(
                                                                           reg,
                                                                           mathFunc) ??
@@ -729,11 +758,22 @@ class _BodyContainerState extends State<BodyContainer> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      Navigator.pushNamed(
-                                          context, DetailPageCountry);
-                                      Fluttertoast.showToast(
-                                          msg:
-                                              'This Feature Will Come Soon And Stay Tune!');
+                                      if (singleReport.country.dailyConfirmed !=
+                                              0 ||
+                                          singleReport.country.dailyConfirmed >
+                                              0) {
+                                        Navigator.pushNamed(
+                                            context, DetailPageCountry,
+                                            arguments: singleReport.country);
+                                      } else {
+                                        Fluttertoast.showToast(
+                                            msg:
+                                                'Please select country to see details!');
+                                      }
+                                      // print(singleReport.country);
+
+                                      // print(singleReport
+                                      //     .countryReport.activeCases);
                                     },
                                     child: Center(
                                         child: Text(
@@ -899,7 +939,7 @@ class _BodyContainerState extends State<BodyContainer> {
                               InkWell(
                                 onTap: ssssss == false
                                     ? () {
-                                        updateAllCountrsss();
+                                        singleReport.getcountrydata();
                                       }
                                     : null,
                                 child: Padding(
@@ -965,29 +1005,41 @@ class _BodyContainerState extends State<BodyContainer> {
                                                   'Country',
                                                   (showall == false)
                                                       ? 10
-                                                      : allCountry
-                                                          .countryCode.length)),
+                                                      : singleReport
+                                                          .countryReport
+                                                          .country
+                                                          .length,
+                                                  singleReport)),
                                           Expanded(
                                               child: _buildcolum2(
                                                   'Confirmed',
                                                   (showall == false)
                                                       ? 10
-                                                      : allCountry
-                                                          .countryCode.length)),
+                                                      : singleReport
+                                                          .countryReport
+                                                          .country
+                                                          .length,
+                                                  singleReport)),
                                           Expanded(
                                               child: _buildcolum3(
                                                   'Recovered',
                                                   (showall == false)
                                                       ? 10
-                                                      : allCountry
-                                                          .countryCode.length)),
+                                                      : singleReport
+                                                          .countryReport
+                                                          .country
+                                                          .length,
+                                                  singleReport)),
                                           Expanded(
                                               child: _buildcolum4(
                                                   'Deaths',
                                                   (showall == false)
                                                       ? 10
-                                                      : allCountry
-                                                          .countryCode.length)),
+                                                      : singleReport
+                                                          .countryReport
+                                                          .country
+                                                          .length,
+                                                  singleReport)),
                                           // Expanded(child: _buildcolum('dddd', 10)),
                                         ],
                                       );
@@ -1044,7 +1096,7 @@ class _BodyContainerState extends State<BodyContainer> {
                               InkWell(
                                 onTap: ssssss == false
                                     ? () {
-                                        newsData.getVirusData('100');
+                                        newsData.getVirusData('50');
                                       }
                                     : null,
                                 child: Padding(
@@ -1095,10 +1147,11 @@ class _BodyContainerState extends State<BodyContainer> {
 
   @override
   Widget build(BuildContext context) {
+    final singlecountry = Provider.of<SingleReport>(context, listen: true);
     final query = MediaQuery.of(context).devicePixelRatio;
     final DataState checker = Provider.of<DataState>(context, listen: true);
     final newsData = Provider.of<NewsFetch>(context);
-    // print(checker.country?.confirmed);
-    return buildColumn(checker, query, newsData);
+    // print(checker.country?.totalConfirmed);
+    return buildColumn(checker, query, newsData, singlecountry);
   }
 }

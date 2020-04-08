@@ -8,38 +8,41 @@ part of 'covid_freezed.dart';
 
 _$_Country _$_$_CountryFromJson(Map<String, dynamic> json) {
   return _$_Country(
-    recover: json['recover'] as num ?? 0,
-    death: json['death'] as num ?? 0,
-    confirmed: json['confirmed'] as num ?? 0,
-    countryName: json['countryName'] as String ?? '',
-    countryFlag: json['countryFlag'] as String ?? '',
+    totalRecovered: json['totalRecovered'] as num ?? 0,
+    totalDeaths: json['totalDeaths'] as num ?? 0,
+    totalConfirmed: json['totalConfirmed'] as num ?? 0,
+    country: json['country'] as String ?? '',
+    countryCode: json['countryCode'] as String ?? '',
+    dailyConfirmed: json['dailyConfirmed'] as num ?? 0,
+    dailyDeaths: json['dailyDeaths'] as num ?? 0,
+    activeCases: json['activeCases'] as num ?? 0,
+    totalCritical: json['totalCritical'] as num ?? 0,
+    totalConfirmedPerMillionPopulation:
+        json['totalConfirmedPerMillionPopulation'] as num ?? 0,
+    totalDeathsPerMillionPopulation:
+        json['totalDeathsPerMillionPopulation'] as num ?? 0,
+    fR: json['fR'] as String ?? '',
+    pR: json['pR'] as String ?? '',
+    lastUpdated: json['lastUpdated'] as String ?? '',
   );
 }
 
 Map<String, dynamic> _$_$_CountryToJson(_$_Country instance) =>
     <String, dynamic>{
-      'recover': instance.recover,
-      'death': instance.death,
-      'confirmed': instance.confirmed,
-      'countryName': instance.countryName,
-      'countryFlag': instance.countryFlag,
-    };
-
-_$_AllCountry _$_$_AllCountryFromJson(Map<String, dynamic> json) {
-  return _$_AllCountry(
-    recover: json['recover'] as List,
-    death: json['death'] as List,
-    confirmed: json['confirmed'] as List,
-    countryCode: json['countryCode'] as List,
-    country: json['country'] as List,
-  );
-}
-
-Map<String, dynamic> _$_$_AllCountryToJson(_$_AllCountry instance) =>
-    <String, dynamic>{
-      'recover': instance.recover,
-      'death': instance.death,
-      'confirmed': instance.confirmed,
-      'countryCode': instance.countryCode,
+      'totalRecovered': instance.totalRecovered,
+      'totalDeaths': instance.totalDeaths,
+      'totalConfirmed': instance.totalConfirmed,
       'country': instance.country,
+      'countryCode': instance.countryCode,
+      'dailyConfirmed': instance.dailyConfirmed,
+      'dailyDeaths': instance.dailyDeaths,
+      'activeCases': instance.activeCases,
+      'totalCritical': instance.totalCritical,
+      'totalConfirmedPerMillionPopulation':
+          instance.totalConfirmedPerMillionPopulation,
+      'totalDeathsPerMillionPopulation':
+          instance.totalDeathsPerMillionPopulation,
+      'fR': instance.fR,
+      'pR': instance.pR,
+      'lastUpdated': instance.lastUpdated,
     };

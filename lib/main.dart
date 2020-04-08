@@ -3,6 +3,8 @@ import 'package:coronatracker/Service_Locator/locator.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/http/fetch_api.dart';
 import 'package:coronatracker/provider/boolstates.dart';
+import 'package:coronatracker/provider/getGlobal.dart';
+import 'package:coronatracker/provider/getsinglereport.dart';
 import 'package:coronatracker/provider/newsfetch.dart';
 import 'package:coronatracker/screen/body.dart';
 import 'package:coronatracker/screen/loading.dart';
@@ -155,6 +157,12 @@ class _LoadingPageState extends State<LoadingPage> {
       body: MultiProvider(providers: <SingleChildWidget>[
         ChangeNotifierProvider<NewsFetch>(
           create: (context) => NewsFetch(),
+        ),
+        ChangeNotifierProvider<SingleReport>(
+          create: (context) => SingleReport(),
+        ),
+        ChangeNotifierProvider<GetGlobal>(
+          create: (context) => GetGlobal(),
         ),
         ChangeNotifierProvider<ApiData>(
           create: (context) => ApiData(),

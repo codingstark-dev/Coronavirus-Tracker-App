@@ -7,8 +7,10 @@ class NetworkAPI {
   final String url;
 
   Future getData() async {
-    http.Response response = await http.get(url);
-    
+    Map<String, String> header = {"Content-Type": "application/json"};
+
+    http.Response response = await http.get(url,headers: header,);
+
     // return if only request is successful
     if (response.statusCode == 200) {
       String data = response.body;

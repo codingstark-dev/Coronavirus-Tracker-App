@@ -33,17 +33,27 @@ class _NewsSectionState extends State<NewsSection> {
                     subtitle: Row(
                       children: <Widget>[
                         Flexible(
-                          child: Text( 
-                            newsFetch?.newsData?.title[index]?.toString(),
-                            style: TextStyle(fontWeight: FontWeight.w500),overflow: TextOverflow.ellipsis,maxLines: 2,
+                          child: Text(
+                            (newsFetch?.newsData?.title == null ||
+                                    newsFetch?.newsData?.title == 'null' ||
+                                    newsFetch?.newsData?.title == '')
+                                ? ''
+                                : newsFetch?.newsData?.title[index]?.toString(),
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                           ),
                         ),
                         Text(
-                          timeago
-                              .format(DateTime.parse(newsFetch
-                                  ?.newsData?.publishedAt[index]
-                                  .toString()))
-                              .toString(),
+                          (newsFetch?.newsData?.title == null ||
+                                  newsFetch?.newsData?.title == 'null' ||
+                                  newsFetch?.newsData?.title == '')
+                              ? ''
+                              : timeago
+                                  .format(DateTime.parse(newsFetch
+                                      ?.newsData?.publishedAt[index]
+                                      .toString()))
+                                  .toString(),
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 11),
                           overflow: TextOverflow.ellipsis,
@@ -51,10 +61,18 @@ class _NewsSectionState extends State<NewsSection> {
                       ],
                     ),
                     title: Text(
-                      newsFetch.newsData.title[index].toString(),
+                      (newsFetch?.newsData?.title == null ||
+                              newsFetch?.newsData?.title == 'null' ||
+                              newsFetch?.newsData?.title == '')
+                          ? ''
+                          : newsFetch.newsData.title[index].toString(),
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
-                    leading: Image.network(
+                    leading: Image.network(  (newsFetch?.newsData?.title == null ||
+                                    newsFetch?.newsData?.title == 'null' ||
+                                    newsFetch?.newsData?.title == '')
+                                ? 'https://images-wixmp-530a50041672c69d335ba4cf.wixmp.com/templates/image/b77fe464cfc445da9003a5383a3e1acf.jpg/v1/fill/w_322,h_182,q_90,usm_0.60_1.00_0.01/b77fe464cfc445da9003a5383a3e1acf.jpg'
+                                :
                       newsFetch?.newsData?.urlToImage[index].toString(),
                       fit: BoxFit.cover,
                       height: 60,

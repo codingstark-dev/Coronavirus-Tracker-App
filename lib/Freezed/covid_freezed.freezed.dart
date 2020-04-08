@@ -16,17 +16,35 @@ class _$CountryTearOff {
   const _$CountryTearOff();
 
   _Country call(
-      {num recover = 0,
-      num death = 0,
-      num confirmed = 0,
-      @nullable String countryName = '',
-      @nullable String countryFlag = ''}) {
+      {num totalRecovered = 0,
+      num totalDeaths = 0,
+      num totalConfirmed = 0,
+      @nullable String country = '',
+      @nullable String countryCode = '',
+      @nullable num dailyConfirmed = 0,
+      @nullable num dailyDeaths = 0,
+      @nullable num activeCases = 0,
+      @nullable num totalCritical = 0,
+      @nullable num totalConfirmedPerMillionPopulation = 0,
+      @nullable num totalDeathsPerMillionPopulation = 0,
+      @nullable String fR = '',
+      @nullable String pR = '',
+      @nullable String lastUpdated = ''}) {
     return _Country(
-      recover: recover,
-      death: death,
-      confirmed: confirmed,
-      countryName: countryName,
-      countryFlag: countryFlag,
+      totalRecovered: totalRecovered,
+      totalDeaths: totalDeaths,
+      totalConfirmed: totalConfirmed,
+      country: country,
+      countryCode: countryCode,
+      dailyConfirmed: dailyConfirmed,
+      dailyDeaths: dailyDeaths,
+      activeCases: activeCases,
+      totalCritical: totalCritical,
+      totalConfirmedPerMillionPopulation: totalConfirmedPerMillionPopulation,
+      totalDeathsPerMillionPopulation: totalDeathsPerMillionPopulation,
+      fR: fR,
+      pR: pR,
+      lastUpdated: lastUpdated,
     );
   }
 }
@@ -35,13 +53,31 @@ class _$CountryTearOff {
 const $Country = _$CountryTearOff();
 
 mixin _$Country {
-  num get recover;
-  num get death;
-  num get confirmed;
+  num get totalRecovered;
+  num get totalDeaths;
+  num get totalConfirmed;
   @nullable
-  String get countryName;
+  String get country;
   @nullable
-  String get countryFlag;
+  String get countryCode;
+  @nullable
+  num get dailyConfirmed;
+  @nullable
+  num get dailyDeaths;
+  @nullable
+  num get activeCases;
+  @nullable
+  num get totalCritical;
+  @nullable
+  num get totalConfirmedPerMillionPopulation;
+  @nullable
+  num get totalDeathsPerMillionPopulation;
+  @nullable
+  String get fR;
+  @nullable
+  String get pR;
+  @nullable
+  String get lastUpdated;
 
   Map<String, dynamic> toJson();
   $CountryCopyWith<Country> get copyWith;
@@ -51,11 +87,20 @@ abstract class $CountryCopyWith<$Res> {
   factory $CountryCopyWith(Country value, $Res Function(Country) then) =
       _$CountryCopyWithImpl<$Res>;
   $Res call(
-      {num recover,
-      num death,
-      num confirmed,
-      @nullable String countryName,
-      @nullable String countryFlag});
+      {num totalRecovered,
+      num totalDeaths,
+      num totalConfirmed,
+      @nullable String country,
+      @nullable String countryCode,
+      @nullable num dailyConfirmed,
+      @nullable num dailyDeaths,
+      @nullable num activeCases,
+      @nullable num totalCritical,
+      @nullable num totalConfirmedPerMillionPopulation,
+      @nullable num totalDeathsPerMillionPopulation,
+      @nullable String fR,
+      @nullable String pR,
+      @nullable String lastUpdated});
 }
 
 class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
@@ -67,20 +112,55 @@ class _$CountryCopyWithImpl<$Res> implements $CountryCopyWith<$Res> {
 
   @override
   $Res call({
-    Object recover = freezed,
-    Object death = freezed,
-    Object confirmed = freezed,
-    Object countryName = freezed,
-    Object countryFlag = freezed,
+    Object totalRecovered = freezed,
+    Object totalDeaths = freezed,
+    Object totalConfirmed = freezed,
+    Object country = freezed,
+    Object countryCode = freezed,
+    Object dailyConfirmed = freezed,
+    Object dailyDeaths = freezed,
+    Object activeCases = freezed,
+    Object totalCritical = freezed,
+    Object totalConfirmedPerMillionPopulation = freezed,
+    Object totalDeathsPerMillionPopulation = freezed,
+    Object fR = freezed,
+    Object pR = freezed,
+    Object lastUpdated = freezed,
   }) {
     return _then(_value.copyWith(
-      recover: recover == freezed ? _value.recover : recover as num,
-      death: death == freezed ? _value.death : death as num,
-      confirmed: confirmed == freezed ? _value.confirmed : confirmed as num,
-      countryName:
-          countryName == freezed ? _value.countryName : countryName as String,
-      countryFlag:
-          countryFlag == freezed ? _value.countryFlag : countryFlag as String,
+      totalRecovered: totalRecovered == freezed
+          ? _value.totalRecovered
+          : totalRecovered as num,
+      totalDeaths:
+          totalDeaths == freezed ? _value.totalDeaths : totalDeaths as num,
+      totalConfirmed: totalConfirmed == freezed
+          ? _value.totalConfirmed
+          : totalConfirmed as num,
+      country: country == freezed ? _value.country : country as String,
+      countryCode:
+          countryCode == freezed ? _value.countryCode : countryCode as String,
+      dailyConfirmed: dailyConfirmed == freezed
+          ? _value.dailyConfirmed
+          : dailyConfirmed as num,
+      dailyDeaths:
+          dailyDeaths == freezed ? _value.dailyDeaths : dailyDeaths as num,
+      activeCases:
+          activeCases == freezed ? _value.activeCases : activeCases as num,
+      totalCritical: totalCritical == freezed
+          ? _value.totalCritical
+          : totalCritical as num,
+      totalConfirmedPerMillionPopulation:
+          totalConfirmedPerMillionPopulation == freezed
+              ? _value.totalConfirmedPerMillionPopulation
+              : totalConfirmedPerMillionPopulation as num,
+      totalDeathsPerMillionPopulation:
+          totalDeathsPerMillionPopulation == freezed
+              ? _value.totalDeathsPerMillionPopulation
+              : totalDeathsPerMillionPopulation as num,
+      fR: fR == freezed ? _value.fR : fR as String,
+      pR: pR == freezed ? _value.pR : pR as String,
+      lastUpdated:
+          lastUpdated == freezed ? _value.lastUpdated : lastUpdated as String,
     ));
   }
 }
@@ -90,11 +170,20 @@ abstract class _$CountryCopyWith<$Res> implements $CountryCopyWith<$Res> {
       __$CountryCopyWithImpl<$Res>;
   @override
   $Res call(
-      {num recover,
-      num death,
-      num confirmed,
-      @nullable String countryName,
-      @nullable String countryFlag});
+      {num totalRecovered,
+      num totalDeaths,
+      num totalConfirmed,
+      @nullable String country,
+      @nullable String countryCode,
+      @nullable num dailyConfirmed,
+      @nullable num dailyDeaths,
+      @nullable num activeCases,
+      @nullable num totalCritical,
+      @nullable num totalConfirmedPerMillionPopulation,
+      @nullable num totalDeathsPerMillionPopulation,
+      @nullable String fR,
+      @nullable String pR,
+      @nullable String lastUpdated});
 }
 
 class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
@@ -107,20 +196,55 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object recover = freezed,
-    Object death = freezed,
-    Object confirmed = freezed,
-    Object countryName = freezed,
-    Object countryFlag = freezed,
+    Object totalRecovered = freezed,
+    Object totalDeaths = freezed,
+    Object totalConfirmed = freezed,
+    Object country = freezed,
+    Object countryCode = freezed,
+    Object dailyConfirmed = freezed,
+    Object dailyDeaths = freezed,
+    Object activeCases = freezed,
+    Object totalCritical = freezed,
+    Object totalConfirmedPerMillionPopulation = freezed,
+    Object totalDeathsPerMillionPopulation = freezed,
+    Object fR = freezed,
+    Object pR = freezed,
+    Object lastUpdated = freezed,
   }) {
     return _then(_Country(
-      recover: recover == freezed ? _value.recover : recover as num,
-      death: death == freezed ? _value.death : death as num,
-      confirmed: confirmed == freezed ? _value.confirmed : confirmed as num,
-      countryName:
-          countryName == freezed ? _value.countryName : countryName as String,
-      countryFlag:
-          countryFlag == freezed ? _value.countryFlag : countryFlag as String,
+      totalRecovered: totalRecovered == freezed
+          ? _value.totalRecovered
+          : totalRecovered as num,
+      totalDeaths:
+          totalDeaths == freezed ? _value.totalDeaths : totalDeaths as num,
+      totalConfirmed: totalConfirmed == freezed
+          ? _value.totalConfirmed
+          : totalConfirmed as num,
+      country: country == freezed ? _value.country : country as String,
+      countryCode:
+          countryCode == freezed ? _value.countryCode : countryCode as String,
+      dailyConfirmed: dailyConfirmed == freezed
+          ? _value.dailyConfirmed
+          : dailyConfirmed as num,
+      dailyDeaths:
+          dailyDeaths == freezed ? _value.dailyDeaths : dailyDeaths as num,
+      activeCases:
+          activeCases == freezed ? _value.activeCases : activeCases as num,
+      totalCritical: totalCritical == freezed
+          ? _value.totalCritical
+          : totalCritical as num,
+      totalConfirmedPerMillionPopulation:
+          totalConfirmedPerMillionPopulation == freezed
+              ? _value.totalConfirmedPerMillionPopulation
+              : totalConfirmedPerMillionPopulation as num,
+      totalDeathsPerMillionPopulation:
+          totalDeathsPerMillionPopulation == freezed
+              ? _value.totalDeathsPerMillionPopulation
+              : totalDeathsPerMillionPopulation as num,
+      fR: fR == freezed ? _value.fR : fR as String,
+      pR: pR == freezed ? _value.pR : pR as String,
+      lastUpdated:
+          lastUpdated == freezed ? _value.lastUpdated : lastUpdated as String,
     ));
   }
 }
@@ -128,39 +252,84 @@ class __$CountryCopyWithImpl<$Res> extends _$CountryCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Country with DiagnosticableTreeMixin implements _Country {
   const _$_Country(
-      {this.recover = 0,
-      this.death = 0,
-      this.confirmed = 0,
-      @nullable this.countryName = '',
-      @nullable this.countryFlag = ''})
-      : assert(recover != null),
-        assert(death != null),
-        assert(confirmed != null);
+      {this.totalRecovered = 0,
+      this.totalDeaths = 0,
+      this.totalConfirmed = 0,
+      @nullable this.country = '',
+      @nullable this.countryCode = '',
+      @nullable this.dailyConfirmed = 0,
+      @nullable this.dailyDeaths = 0,
+      @nullable this.activeCases = 0,
+      @nullable this.totalCritical = 0,
+      @nullable this.totalConfirmedPerMillionPopulation = 0,
+      @nullable this.totalDeathsPerMillionPopulation = 0,
+      @nullable this.fR = '',
+      @nullable this.pR = '',
+      @nullable this.lastUpdated = ''})
+      : assert(totalRecovered != null),
+        assert(totalDeaths != null),
+        assert(totalConfirmed != null);
 
   factory _$_Country.fromJson(Map<String, dynamic> json) =>
       _$_$_CountryFromJson(json);
 
   @JsonKey(defaultValue: 0)
   @override
-  final num recover;
+  final num totalRecovered;
   @JsonKey(defaultValue: 0)
   @override
-  final num death;
+  final num totalDeaths;
   @JsonKey(defaultValue: 0)
   @override
-  final num confirmed;
+  final num totalConfirmed;
   @JsonKey(defaultValue: '')
   @override
   @nullable
-  final String countryName;
+  final String country;
   @JsonKey(defaultValue: '')
   @override
   @nullable
-  final String countryFlag;
+  final String countryCode;
+  @JsonKey(defaultValue: 0)
+  @override
+  @nullable
+  final num dailyConfirmed;
+  @JsonKey(defaultValue: 0)
+  @override
+  @nullable
+  final num dailyDeaths;
+  @JsonKey(defaultValue: 0)
+  @override
+  @nullable
+  final num activeCases;
+  @JsonKey(defaultValue: 0)
+  @override
+  @nullable
+  final num totalCritical;
+  @JsonKey(defaultValue: 0)
+  @override
+  @nullable
+  final num totalConfirmedPerMillionPopulation;
+  @JsonKey(defaultValue: 0)
+  @override
+  @nullable
+  final num totalDeathsPerMillionPopulation;
+  @JsonKey(defaultValue: '')
+  @override
+  @nullable
+  final String fR;
+  @JsonKey(defaultValue: '')
+  @override
+  @nullable
+  final String pR;
+  @JsonKey(defaultValue: '')
+  @override
+  @nullable
+  final String lastUpdated;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Country(recover: $recover, death: $death, confirmed: $confirmed, countryName: $countryName, countryFlag: $countryFlag)';
+    return 'Country(totalRecovered: $totalRecovered, totalDeaths: $totalDeaths, totalConfirmed: $totalConfirmed, country: $country, countryCode: $countryCode, dailyConfirmed: $dailyConfirmed, dailyDeaths: $dailyDeaths, activeCases: $activeCases, totalCritical: $totalCritical, totalConfirmedPerMillionPopulation: $totalConfirmedPerMillionPopulation, totalDeathsPerMillionPopulation: $totalDeathsPerMillionPopulation, fR: $fR, pR: $pR, lastUpdated: $lastUpdated)';
   }
 
   @override
@@ -168,41 +337,91 @@ class _$_Country with DiagnosticableTreeMixin implements _Country {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Country'))
-      ..add(DiagnosticsProperty('recover', recover))
-      ..add(DiagnosticsProperty('death', death))
-      ..add(DiagnosticsProperty('confirmed', confirmed))
-      ..add(DiagnosticsProperty('countryName', countryName))
-      ..add(DiagnosticsProperty('countryFlag', countryFlag));
+      ..add(DiagnosticsProperty('totalRecovered', totalRecovered))
+      ..add(DiagnosticsProperty('totalDeaths', totalDeaths))
+      ..add(DiagnosticsProperty('totalConfirmed', totalConfirmed))
+      ..add(DiagnosticsProperty('country', country))
+      ..add(DiagnosticsProperty('countryCode', countryCode))
+      ..add(DiagnosticsProperty('dailyConfirmed', dailyConfirmed))
+      ..add(DiagnosticsProperty('dailyDeaths', dailyDeaths))
+      ..add(DiagnosticsProperty('activeCases', activeCases))
+      ..add(DiagnosticsProperty('totalCritical', totalCritical))
+      ..add(DiagnosticsProperty('totalConfirmedPerMillionPopulation',
+          totalConfirmedPerMillionPopulation))
+      ..add(DiagnosticsProperty(
+          'totalDeathsPerMillionPopulation', totalDeathsPerMillionPopulation))
+      ..add(DiagnosticsProperty('fR', fR))
+      ..add(DiagnosticsProperty('pR', pR))
+      ..add(DiagnosticsProperty('lastUpdated', lastUpdated));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Country &&
-            (identical(other.recover, recover) ||
+            (identical(other.totalRecovered, totalRecovered) ||
                 const DeepCollectionEquality()
-                    .equals(other.recover, recover)) &&
-            (identical(other.death, death) ||
-                const DeepCollectionEquality().equals(other.death, death)) &&
-            (identical(other.confirmed, confirmed) ||
+                    .equals(other.totalRecovered, totalRecovered)) &&
+            (identical(other.totalDeaths, totalDeaths) ||
                 const DeepCollectionEquality()
-                    .equals(other.confirmed, confirmed)) &&
-            (identical(other.countryName, countryName) ||
+                    .equals(other.totalDeaths, totalDeaths)) &&
+            (identical(other.totalConfirmed, totalConfirmed) ||
                 const DeepCollectionEquality()
-                    .equals(other.countryName, countryName)) &&
-            (identical(other.countryFlag, countryFlag) ||
+                    .equals(other.totalConfirmed, totalConfirmed)) &&
+            (identical(other.country, country) ||
                 const DeepCollectionEquality()
-                    .equals(other.countryFlag, countryFlag)));
+                    .equals(other.country, country)) &&
+            (identical(other.countryCode, countryCode) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryCode, countryCode)) &&
+            (identical(other.dailyConfirmed, dailyConfirmed) ||
+                const DeepCollectionEquality()
+                    .equals(other.dailyConfirmed, dailyConfirmed)) &&
+            (identical(other.dailyDeaths, dailyDeaths) ||
+                const DeepCollectionEquality()
+                    .equals(other.dailyDeaths, dailyDeaths)) &&
+            (identical(other.activeCases, activeCases) ||
+                const DeepCollectionEquality()
+                    .equals(other.activeCases, activeCases)) &&
+            (identical(other.totalCritical, totalCritical) ||
+                const DeepCollectionEquality()
+                    .equals(other.totalCritical, totalCritical)) &&
+            (identical(other.totalConfirmedPerMillionPopulation,
+                    totalConfirmedPerMillionPopulation) ||
+                const DeepCollectionEquality().equals(
+                    other.totalConfirmedPerMillionPopulation,
+                    totalConfirmedPerMillionPopulation)) &&
+            (identical(other.totalDeathsPerMillionPopulation,
+                    totalDeathsPerMillionPopulation) ||
+                const DeepCollectionEquality().equals(
+                    other.totalDeathsPerMillionPopulation,
+                    totalDeathsPerMillionPopulation)) &&
+            (identical(other.fR, fR) ||
+                const DeepCollectionEquality().equals(other.fR, fR)) &&
+            (identical(other.pR, pR) ||
+                const DeepCollectionEquality().equals(other.pR, pR)) &&
+            (identical(other.lastUpdated, lastUpdated) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastUpdated, lastUpdated)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(recover) ^
-      const DeepCollectionEquality().hash(death) ^
-      const DeepCollectionEquality().hash(confirmed) ^
-      const DeepCollectionEquality().hash(countryName) ^
-      const DeepCollectionEquality().hash(countryFlag);
+      const DeepCollectionEquality().hash(totalRecovered) ^
+      const DeepCollectionEquality().hash(totalDeaths) ^
+      const DeepCollectionEquality().hash(totalConfirmed) ^
+      const DeepCollectionEquality().hash(country) ^
+      const DeepCollectionEquality().hash(countryCode) ^
+      const DeepCollectionEquality().hash(dailyConfirmed) ^
+      const DeepCollectionEquality().hash(dailyDeaths) ^
+      const DeepCollectionEquality().hash(activeCases) ^
+      const DeepCollectionEquality().hash(totalCritical) ^
+      const DeepCollectionEquality().hash(totalConfirmedPerMillionPopulation) ^
+      const DeepCollectionEquality().hash(totalDeathsPerMillionPopulation) ^
+      const DeepCollectionEquality().hash(fR) ^
+      const DeepCollectionEquality().hash(pR) ^
+      const DeepCollectionEquality().hash(lastUpdated);
 
   @override
   _$CountryCopyWith<_Country> get copyWith =>
@@ -216,251 +435,64 @@ class _$_Country with DiagnosticableTreeMixin implements _Country {
 
 abstract class _Country implements Country {
   const factory _Country(
-      {num recover,
-      num death,
-      num confirmed,
-      @nullable String countryName,
-      @nullable String countryFlag}) = _$_Country;
+      {num totalRecovered,
+      num totalDeaths,
+      num totalConfirmed,
+      @nullable String country,
+      @nullable String countryCode,
+      @nullable num dailyConfirmed,
+      @nullable num dailyDeaths,
+      @nullable num activeCases,
+      @nullable num totalCritical,
+      @nullable num totalConfirmedPerMillionPopulation,
+      @nullable num totalDeathsPerMillionPopulation,
+      @nullable String fR,
+      @nullable String pR,
+      @nullable String lastUpdated}) = _$_Country;
 
   factory _Country.fromJson(Map<String, dynamic> json) = _$_Country.fromJson;
 
   @override
-  num get recover;
+  num get totalRecovered;
   @override
-  num get death;
+  num get totalDeaths;
   @override
-  num get confirmed;
-  @override
-  @nullable
-  String get countryName;
+  num get totalConfirmed;
   @override
   @nullable
-  String get countryFlag;
+  String get country;
+  @override
+  @nullable
+  String get countryCode;
+  @override
+  @nullable
+  num get dailyConfirmed;
+  @override
+  @nullable
+  num get dailyDeaths;
+  @override
+  @nullable
+  num get activeCases;
+  @override
+  @nullable
+  num get totalCritical;
+  @override
+  @nullable
+  num get totalConfirmedPerMillionPopulation;
+  @override
+  @nullable
+  num get totalDeathsPerMillionPopulation;
+  @override
+  @nullable
+  String get fR;
+  @override
+  @nullable
+  String get pR;
+  @override
+  @nullable
+  String get lastUpdated;
   @override
   _$CountryCopyWith<_Country> get copyWith;
-}
-
-AllCountry _$AllCountryFromJson(Map<String, dynamic> json) {
-  return _AllCountry.fromJson(json);
-}
-
-class _$AllCountryTearOff {
-  const _$AllCountryTearOff();
-
-  _AllCountry call(
-      {List<dynamic> recover,
-      List<dynamic> death,
-      List<dynamic> confirmed,
-      List<dynamic> countryCode,
-      List<dynamic> country}) {
-    return _AllCountry(
-      recover: recover,
-      death: death,
-      confirmed: confirmed,
-      countryCode: countryCode,
-      country: country,
-    );
-  }
-}
-
-// ignore: unused_element
-const $AllCountry = _$AllCountryTearOff();
-
-mixin _$AllCountry {
-  List<dynamic> get recover;
-  List<dynamic> get death;
-  List<dynamic> get confirmed;
-  List<dynamic> get countryCode;
-  List<dynamic> get country;
-
-  Map<String, dynamic> toJson();
-  $AllCountryCopyWith<AllCountry> get copyWith;
-}
-
-abstract class $AllCountryCopyWith<$Res> {
-  factory $AllCountryCopyWith(
-          AllCountry value, $Res Function(AllCountry) then) =
-      _$AllCountryCopyWithImpl<$Res>;
-  $Res call(
-      {List<dynamic> recover,
-      List<dynamic> death,
-      List<dynamic> confirmed,
-      List<dynamic> countryCode,
-      List<dynamic> country});
-}
-
-class _$AllCountryCopyWithImpl<$Res> implements $AllCountryCopyWith<$Res> {
-  _$AllCountryCopyWithImpl(this._value, this._then);
-
-  final AllCountry _value;
-  // ignore: unused_field
-  final $Res Function(AllCountry) _then;
-
-  @override
-  $Res call({
-    Object recover = freezed,
-    Object death = freezed,
-    Object confirmed = freezed,
-    Object countryCode = freezed,
-    Object country = freezed,
-  }) {
-    return _then(_value.copyWith(
-      recover: recover == freezed ? _value.recover : recover as List<dynamic>,
-      death: death == freezed ? _value.death : death as List<dynamic>,
-      confirmed:
-          confirmed == freezed ? _value.confirmed : confirmed as List<dynamic>,
-      countryCode: countryCode == freezed
-          ? _value.countryCode
-          : countryCode as List<dynamic>,
-      country: country == freezed ? _value.country : country as List<dynamic>,
-    ));
-  }
-}
-
-abstract class _$AllCountryCopyWith<$Res> implements $AllCountryCopyWith<$Res> {
-  factory _$AllCountryCopyWith(
-          _AllCountry value, $Res Function(_AllCountry) then) =
-      __$AllCountryCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {List<dynamic> recover,
-      List<dynamic> death,
-      List<dynamic> confirmed,
-      List<dynamic> countryCode,
-      List<dynamic> country});
-}
-
-class __$AllCountryCopyWithImpl<$Res> extends _$AllCountryCopyWithImpl<$Res>
-    implements _$AllCountryCopyWith<$Res> {
-  __$AllCountryCopyWithImpl(
-      _AllCountry _value, $Res Function(_AllCountry) _then)
-      : super(_value, (v) => _then(v as _AllCountry));
-
-  @override
-  _AllCountry get _value => super._value as _AllCountry;
-
-  @override
-  $Res call({
-    Object recover = freezed,
-    Object death = freezed,
-    Object confirmed = freezed,
-    Object countryCode = freezed,
-    Object country = freezed,
-  }) {
-    return _then(_AllCountry(
-      recover: recover == freezed ? _value.recover : recover as List<dynamic>,
-      death: death == freezed ? _value.death : death as List<dynamic>,
-      confirmed:
-          confirmed == freezed ? _value.confirmed : confirmed as List<dynamic>,
-      countryCode: countryCode == freezed
-          ? _value.countryCode
-          : countryCode as List<dynamic>,
-      country: country == freezed ? _value.country : country as List<dynamic>,
-    ));
-  }
-}
-
-@JsonSerializable()
-class _$_AllCountry with DiagnosticableTreeMixin implements _AllCountry {
-  const _$_AllCountry(
-      {this.recover,
-      this.death,
-      this.confirmed,
-      this.countryCode,
-      this.country});
-
-  factory _$_AllCountry.fromJson(Map<String, dynamic> json) =>
-      _$_$_AllCountryFromJson(json);
-
-  @override
-  final List<dynamic> recover;
-  @override
-  final List<dynamic> death;
-  @override
-  final List<dynamic> confirmed;
-  @override
-  final List<dynamic> countryCode;
-  @override
-  final List<dynamic> country;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AllCountry(recover: $recover, death: $death, confirmed: $confirmed, countryCode: $countryCode, country: $country)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'AllCountry'))
-      ..add(DiagnosticsProperty('recover', recover))
-      ..add(DiagnosticsProperty('death', death))
-      ..add(DiagnosticsProperty('confirmed', confirmed))
-      ..add(DiagnosticsProperty('countryCode', countryCode))
-      ..add(DiagnosticsProperty('country', country));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _AllCountry &&
-            (identical(other.recover, recover) ||
-                const DeepCollectionEquality()
-                    .equals(other.recover, recover)) &&
-            (identical(other.death, death) ||
-                const DeepCollectionEquality().equals(other.death, death)) &&
-            (identical(other.confirmed, confirmed) ||
-                const DeepCollectionEquality()
-                    .equals(other.confirmed, confirmed)) &&
-            (identical(other.countryCode, countryCode) ||
-                const DeepCollectionEquality()
-                    .equals(other.countryCode, countryCode)) &&
-            (identical(other.country, country) ||
-                const DeepCollectionEquality().equals(other.country, country)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(recover) ^
-      const DeepCollectionEquality().hash(death) ^
-      const DeepCollectionEquality().hash(confirmed) ^
-      const DeepCollectionEquality().hash(countryCode) ^
-      const DeepCollectionEquality().hash(country);
-
-  @override
-  _$AllCountryCopyWith<_AllCountry> get copyWith =>
-      __$AllCountryCopyWithImpl<_AllCountry>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_AllCountryToJson(this);
-  }
-}
-
-abstract class _AllCountry implements AllCountry {
-  const factory _AllCountry(
-      {List<dynamic> recover,
-      List<dynamic> death,
-      List<dynamic> confirmed,
-      List<dynamic> countryCode,
-      List<dynamic> country}) = _$_AllCountry;
-
-  factory _AllCountry.fromJson(Map<String, dynamic> json) =
-      _$_AllCountry.fromJson;
-
-  @override
-  List<dynamic> get recover;
-  @override
-  List<dynamic> get death;
-  @override
-  List<dynamic> get confirmed;
-  @override
-  List<dynamic> get countryCode;
-  @override
-  List<dynamic> get country;
-  @override
-  _$AllCountryCopyWith<_AllCountry> get copyWith;
 }
 
 class _$NewsDataTearOff {
@@ -653,4 +685,315 @@ abstract class _NewsData implements NewsData {
   List<dynamic> get newsdata;
   @override
   _$NewsDataCopyWith<_NewsData> get copyWith;
+}
+
+class _$CountryReportTearOff {
+  const _$CountryReportTearOff();
+
+  _CountryReport call(dynamic countryreport) {
+    return _CountryReport(
+      countryreport,
+    );
+  }
+}
+
+// ignore: unused_element
+const $CountryReport = _$CountryReportTearOff();
+
+mixin _$CountryReport {
+  dynamic get countryreport;
+
+  $CountryReportCopyWith<CountryReport> get copyWith;
+}
+
+abstract class $CountryReportCopyWith<$Res> {
+  factory $CountryReportCopyWith(
+          CountryReport value, $Res Function(CountryReport) then) =
+      _$CountryReportCopyWithImpl<$Res>;
+  $Res call({dynamic countryreport});
+}
+
+class _$CountryReportCopyWithImpl<$Res>
+    implements $CountryReportCopyWith<$Res> {
+  _$CountryReportCopyWithImpl(this._value, this._then);
+
+  final CountryReport _value;
+  // ignore: unused_field
+  final $Res Function(CountryReport) _then;
+
+  @override
+  $Res call({
+    Object countryreport = freezed,
+  }) {
+    return _then(_value.copyWith(
+      countryreport: countryreport == freezed
+          ? _value.countryreport
+          : countryreport as dynamic,
+    ));
+  }
+}
+
+abstract class _$CountryReportCopyWith<$Res>
+    implements $CountryReportCopyWith<$Res> {
+  factory _$CountryReportCopyWith(
+          _CountryReport value, $Res Function(_CountryReport) then) =
+      __$CountryReportCopyWithImpl<$Res>;
+  @override
+  $Res call({dynamic countryreport});
+}
+
+class __$CountryReportCopyWithImpl<$Res>
+    extends _$CountryReportCopyWithImpl<$Res>
+    implements _$CountryReportCopyWith<$Res> {
+  __$CountryReportCopyWithImpl(
+      _CountryReport _value, $Res Function(_CountryReport) _then)
+      : super(_value, (v) => _then(v as _CountryReport));
+
+  @override
+  _CountryReport get _value => super._value as _CountryReport;
+
+  @override
+  $Res call({
+    Object countryreport = freezed,
+  }) {
+    return _then(_CountryReport(
+      countryreport == freezed
+          ? _value.countryreport
+          : countryreport as dynamic,
+    ));
+  }
+}
+
+class _$_CountryReport with DiagnosticableTreeMixin implements _CountryReport {
+  _$_CountryReport(this.countryreport) : assert(countryreport != null);
+
+  @override
+  final dynamic countryreport;
+
+  bool _didcountryCode = false;
+  List<dynamic> _countryCode;
+
+  @override
+  List<dynamic> get countryCode {
+    if (_didcountryCode == false) {
+      _didcountryCode = true;
+      _countryCode = countryreport.map((e) => e['countryCode']).toList();
+    }
+    return _countryCode;
+  }
+
+  bool _didcountry = false;
+  List<dynamic> _country;
+
+  @override
+  List<dynamic> get country {
+    if (_didcountry == false) {
+      _didcountry = true;
+      _country = countryreport.map((e) => e['country']).toList();
+    }
+    return _country;
+  }
+
+  bool _didtotalConfirmed = false;
+  List<dynamic> _totalConfirmed;
+
+  @override
+  List<dynamic> get totalConfirmed {
+    if (_didtotalConfirmed == false) {
+      _didtotalConfirmed = true;
+      _totalConfirmed = countryreport.map((e) => e['totalConfirmed']).toList();
+    }
+    return _totalConfirmed;
+  }
+
+  bool _didtotalDeaths = false;
+  List<dynamic> _totalDeaths;
+
+  @override
+  List<dynamic> get totalDeaths {
+    if (_didtotalDeaths == false) {
+      _didtotalDeaths = true;
+      _totalDeaths = countryreport.map((e) => e['totalDeaths']).toList();
+    }
+    return _totalDeaths;
+  }
+
+  bool _didtotalRecovered = false;
+  List<dynamic> _totalRecovered;
+
+  @override
+  List<dynamic> get totalRecovered {
+    if (_didtotalRecovered == false) {
+      _didtotalRecovered = true;
+      _totalRecovered = countryreport.map((e) => e['totalRecovered']).toList();
+    }
+    return _totalRecovered;
+  }
+
+  bool _diddailyConfirmed = false;
+  List<dynamic> _dailyConfirmed;
+
+  @override
+  List<dynamic> get dailyConfirmed {
+    if (_diddailyConfirmed == false) {
+      _diddailyConfirmed = true;
+      _dailyConfirmed = countryreport.map((e) => e['dailyConfirmed']).toList();
+    }
+    return _dailyConfirmed;
+  }
+
+  bool _diddailyDeaths = false;
+  List<dynamic> _dailyDeaths;
+
+  @override
+  List<dynamic> get dailyDeaths {
+    if (_diddailyDeaths == false) {
+      _diddailyDeaths = true;
+      _dailyDeaths = countryreport.map((e) => e['dailyDeaths']).toList();
+    }
+    return _dailyDeaths;
+  }
+
+  bool _didactiveCases = false;
+  List<dynamic> _activeCases;
+
+  @override
+  List<dynamic> get activeCases {
+    if (_didactiveCases == false) {
+      _didactiveCases = true;
+      _activeCases = countryreport.map((e) => e['activeCases']).toList();
+    }
+    return _activeCases;
+  }
+
+  bool _didtotalCritical = false;
+  List<dynamic> _totalCritical;
+
+  @override
+  List<dynamic> get totalCritical {
+    if (_didtotalCritical == false) {
+      _didtotalCritical = true;
+      _totalCritical = countryreport.map((e) => e['totalCritical']).toList();
+    }
+    return _totalCritical;
+  }
+
+  bool _didtotalConfirmedPerMillionPopulation = false;
+  List<dynamic> _totalConfirmedPerMillionPopulation;
+
+  @override
+  List<dynamic> get totalConfirmedPerMillionPopulation {
+    if (_didtotalConfirmedPerMillionPopulation == false) {
+      _didtotalConfirmedPerMillionPopulation = true;
+      _totalConfirmedPerMillionPopulation = countryreport
+          .map((e) => e['totalConfirmedPerMillionPopulation'])
+          .toList();
+    }
+    return _totalConfirmedPerMillionPopulation;
+  }
+
+  bool _didtotalDeathsPerMillionPopulation = false;
+  List<dynamic> _totalDeathsPerMillionPopulation;
+
+  @override
+  List<dynamic> get totalDeathsPerMillionPopulation {
+    if (_didtotalDeathsPerMillionPopulation == false) {
+      _didtotalDeathsPerMillionPopulation = true;
+      _totalDeathsPerMillionPopulation = countryreport
+          .map((e) => e['totalDeathsPerMillionPopulation'])
+          .toList();
+    }
+    return _totalDeathsPerMillionPopulation;
+  }
+
+  bool _didfR = false;
+  List<dynamic> _fR;
+
+  @override
+  List<dynamic> get fR {
+    if (_didfR == false) {
+      _didfR = true;
+      _fR = countryreport.map((e) => e['FR']).toList();
+    }
+    return _fR;
+  }
+
+  bool _didpR = false;
+  List<dynamic> _pR;
+
+  @override
+  List<dynamic> get pR {
+    if (_didpR == false) {
+      _didpR = true;
+      _pR = countryreport.map((e) => e['PR']).toList();
+    }
+    return _pR;
+  }
+
+  bool _didlastUpdated = false;
+  List<dynamic> _lastUpdated;
+
+  @override
+  List<dynamic> get lastUpdated {
+    if (_didlastUpdated == false) {
+      _didlastUpdated = true;
+      _lastUpdated = countryreport.map((e) => e['lastUpdated']).toList();
+    }
+    return _lastUpdated;
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'CountryReport(countryreport: $countryreport, countryCode: $countryCode, country: $country, totalConfirmed: $totalConfirmed, totalDeaths: $totalDeaths, totalRecovered: $totalRecovered, dailyConfirmed: $dailyConfirmed, dailyDeaths: $dailyDeaths, activeCases: $activeCases, totalCritical: $totalCritical, totalConfirmedPerMillionPopulation: $totalConfirmedPerMillionPopulation, totalDeathsPerMillionPopulation: $totalDeathsPerMillionPopulation, fR: $fR, pR: $pR, lastUpdated: $lastUpdated)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'CountryReport'))
+      ..add(DiagnosticsProperty('countryreport', countryreport))
+      ..add(DiagnosticsProperty('countryCode', countryCode))
+      ..add(DiagnosticsProperty('country', country))
+      ..add(DiagnosticsProperty('totalConfirmed', totalConfirmed))
+      ..add(DiagnosticsProperty('totalDeaths', totalDeaths))
+      ..add(DiagnosticsProperty('totalRecovered', totalRecovered))
+      ..add(DiagnosticsProperty('dailyConfirmed', dailyConfirmed))
+      ..add(DiagnosticsProperty('dailyDeaths', dailyDeaths))
+      ..add(DiagnosticsProperty('activeCases', activeCases))
+      ..add(DiagnosticsProperty('totalCritical', totalCritical))
+      ..add(DiagnosticsProperty('totalConfirmedPerMillionPopulation',
+          totalConfirmedPerMillionPopulation))
+      ..add(DiagnosticsProperty(
+          'totalDeathsPerMillionPopulation', totalDeathsPerMillionPopulation))
+      ..add(DiagnosticsProperty('fR', fR))
+      ..add(DiagnosticsProperty('pR', pR))
+      ..add(DiagnosticsProperty('lastUpdated', lastUpdated));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _CountryReport &&
+            (identical(other.countryreport, countryreport) ||
+                const DeepCollectionEquality()
+                    .equals(other.countryreport, countryreport)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(countryreport);
+
+  @override
+  _$CountryReportCopyWith<_CountryReport> get copyWith =>
+      __$CountryReportCopyWithImpl<_CountryReport>(this, _$identity);
+}
+
+abstract class _CountryReport implements CountryReport {
+  factory _CountryReport(dynamic countryreport) = _$_CountryReport;
+
+  @override
+  dynamic get countryreport;
+  @override
+  _$CountryReportCopyWith<_CountryReport> get copyWith;
 }
