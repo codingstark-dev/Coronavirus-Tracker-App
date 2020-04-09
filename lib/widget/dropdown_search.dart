@@ -37,7 +37,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   Function mathFunc = (Match match) => '${match[1]},';
 
   Future updateAllCountry() async {
-    final dynamic data = await sl.get<ApiData>().getVirusData('global');
+    // final dynamic data = await sl.get<ApiData>().getVirusData('global');
     // final dynamic pros = sl.get<BoolChecker>();
     final datas = await sl.get<ApiData>().getVirusData('global');
     final DataState boolChecker =

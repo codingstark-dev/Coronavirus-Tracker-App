@@ -1,4 +1,5 @@
-import 'package:coronatracker/Freezed/covid_freezed.dart';
+import 'dart:async';
+
 import 'package:coronatracker/Service_Locator/locator.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/http/fetch_api.dart';
@@ -17,32 +18,39 @@ import 'package:coronatracker/service/connectivity_service.dart';
 import 'enums/connectivity_status.dart';
 import 'constant/allConstant.dart';
 import 'package:coronatracker/named_route.dart' as router;
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 void main() {
   serviceLocator();
-  runApp(MaterialApp(
-    navigatorObservers: [sl<AnalyticsService>().getAnalyticsObserver()],
-    onGenerateRoute: router.generateRoute,
-    initialRoute: HomeViewRoute,
-    debugShowCheckedModeBanner: false,
-    home: MultiProvider(
-        providers: <SingleChildWidget>[
-          ChangeNotifierProvider<DataState>(
-            create: (context) => DataState(),
-          ),
-          StreamProvider<ConnectivityStatus>(
-              create: (_) =>
-                  ConnectivityService().connectionStatusController.stream),
-        ],
-        child: FutureBuilder(
-            future: Future.delayed(Duration(seconds: 6)),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return LoadingPAgee();
-              }
-              return Wrapper();
-            })),
-  ));
+  Crashlytics.instance.enableInDevMode = true;
+
+  // Pass all uncaught errors from the framework to Crashlytics.
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  runZoned(() {
+    runApp(MaterialApp(
+      navigatorObservers: [sl<AnalyticsService>().getAnalyticsObserver()],
+      onGenerateRoute: router.generateRoute,
+      initialRoute: HomeViewRoute,
+      debugShowCheckedModeBanner: false,
+      home: MultiProvider(
+          providers: <SingleChildWidget>[
+            ChangeNotifierProvider<DataState>(
+              create: (context) => DataState(),
+            ),
+            StreamProvider<ConnectivityStatus>(
+                create: (_) =>
+                    ConnectivityService().connectionStatusController.stream),
+          ],
+          child: FutureBuilder(
+              future: Future.delayed(Duration(seconds: 6)),
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return LoadingPAgee();
+                }
+                return Wrapper();
+              })),
+    ));
+  }, onError: Crashlytics.instance.recordError);
 }
 
 class LoadingPage extends StatefulWidget {
@@ -130,7 +138,7 @@ class _LoadingPageState extends State<LoadingPage> {
           ],
           leading: Padding(
             padding: EdgeInsets.fromLTRB(14, 10, 0, 0),
-            child: Image.asset('assets/logopng.png'),
+            child: Image.asset('assets/images/coronatracker.png'),
           ),
           backgroundColor: Colors.white,
           title: Padding(
@@ -138,7 +146,7 @@ class _LoadingPageState extends State<LoadingPage> {
             child: RichText(
                 text: TextSpan(children: [
               TextSpan(
-                  text: 'Corona',
+                  text: 'Covid-19-',
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 20,

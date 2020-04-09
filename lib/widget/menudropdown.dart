@@ -2,7 +2,6 @@ import 'package:coronatracker/constant/allConstant.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -10,8 +9,7 @@ class MenuDropDownTopBar extends StatefulWidget {
   MenuDropDownTopBar({Key key}) : super(key: key);
 
   @override
-  _MenuDropDownTopBarState createState() =>
-      _MenuDropDownTopBarState();
+  _MenuDropDownTopBarState createState() => _MenuDropDownTopBarState();
 }
 
 class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
@@ -22,9 +20,7 @@ class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
     return Container(
       decoration: BoxDecoration(boxShadow: <BoxShadow>[
         BoxShadow(
-            color: Colors.black38,
-            blurRadius: 0.05,
-            offset: Offset(0.0, 0.75))
+            color: Colors.black38, blurRadius: 0.05, offset: Offset(0.0, 0.75))
       ], color: Colors.white),
       // color: Colors.white,
       child: Column(
@@ -42,27 +38,26 @@ class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
                     dataState.menuDropDowm == false
                         ? dataState.boolChanger2(true)
                         : dataState.boolChanger2(false);
+                    // Navigator.pushNamed(context, CovidHome);
+                    Navigator.pushReplacementNamed(context, CovidHome);
                   },
                   child: Text(
                     "Home",
                     style: TextStyle(
-                        color: GREEN_COLOR,
-                        fontWeight: FontWeight.w700),
+                        color: GREEN_COLOR, fontWeight: FontWeight.w700),
                   ))),
-          SizedBox(
-              height: 31,
-              child: FlatButton(
-                  onPressed: () {
-                    Fluttertoast.showToast(
-                        msg:
-                            'This Feature Will Come Soon And Stay Tune!');
-                  },
-                  child: Text(
-                    "Travel Alert",
-                    style: TextStyle(
-                        color: GREEN_COLOR,
-                        fontWeight: FontWeight.w700),
-                  ))),
+          // SizedBox(
+          //     height: 31,
+          //     child: FlatButton(
+          //         onPressed: () {
+          //           Fluttertoast.showToast(
+          //               msg: 'This Feature Will Come Soon And Stay Tune!');
+          //         },
+          //         child: Text(
+          //           "Travel Alert",
+          //           style: TextStyle(
+          //               color: GREEN_COLOR, fontWeight: FontWeight.w700),
+          //         ))),
           SizedBox(
               height: 31,
               child: FlatButton(
@@ -73,8 +68,7 @@ class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
                   child: Text(
                     "What is COVID-19",
                     style: TextStyle(
-                        color: GREEN_COLOR,
-                        fontWeight: FontWeight.w700),
+                        color: GREEN_COLOR, fontWeight: FontWeight.w700),
                   ))),
           SizedBox(
               height: 31,
@@ -86,22 +80,18 @@ class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
                   child: Text(
                     "Prevention",
                     style: TextStyle(
-                        color: GREEN_COLOR,
-                        fontWeight: FontWeight.w700),
+                        color: GREEN_COLOR, fontWeight: FontWeight.w700),
                   ))),
           SizedBox(
               height: 31,
               child: FlatButton(
                   onPressed: () {
-                    Fluttertoast.showToast(
-                        msg:
-                            'This Feature Will Come Soon And Stay Tune!');
+                    Navigator.pushNamed(context, Privacypolicy);
                   },
                   child: Text(
-                    "Analytics",
+                    "Privacy Policy",
                     style: TextStyle(
-                        color: GREEN_COLOR,
-                        fontWeight: FontWeight.w700),
+                        color: GREEN_COLOR, fontWeight: FontWeight.w700),
                   ))),
           SizedBox(
               height: 31,
@@ -114,8 +104,7 @@ class _MenuDropDownTopBarState extends State<MenuDropDownTopBar> {
                   child: Text(
                     "About Developer",
                     style: TextStyle(
-                        color: GREEN_COLOR,
-                        fontWeight: FontWeight.w700),
+                        color: GREEN_COLOR, fontWeight: FontWeight.w700),
                   ))),
           SizedBox(
             height: 10,

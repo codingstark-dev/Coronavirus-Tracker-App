@@ -1,6 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'dart:typed_data';
 
+import 'package:coronatracker/widget/menudropdown.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:image_picker_saver/image_picker_saver.dart';
+import 'package:provider/provider.dart';
+import 'dart:ui' as ui;
 import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/constant/allConstant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
@@ -21,6 +26,34 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   Function mathFunc = (Match match) => '${match[1]},';
   RegExp reg = new RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+  final GlobalKey _globalKey1 = GlobalKey();
+
+  bool loading = false;
+
+  // void convertWidgetToImage() async {
+  //   RenderRepaintBoundary renderRepaintBoundary =
+  //       _globalKey1.currentContext.findRenderObject();
+  //   ui.Image boxImage = await renderRepaintBoundary.toImage();
+  //   ByteData byteData =
+  //       await boxImage.toByteData(format: ui.ImageByteFormat.png);
+  //   Uint8List uInt8List = byteData.buffer.asUint8List();
+  //   var filePath = await ImagePickerSaver.saveFile(fileData: uInt8List);
+  //   print(filePath);
+  //   // File f =
+  //   // await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   ShareExtend.share(filePath, "image");
+  //   this.setState(() {
+  //     loading = true;
+  //   });
+  //   // StorageUploadTask storageUploadTask = storageReference
+  //   //     .child("IMG_${DateTime.now().millisecondsSinceEpoch}.png")
+  //   //     .putData(uInt8List);
+
+  //   // await storageUploadTask.onComplete;
+  //   this.setState(() {
+  //     loading = false;
+  //   });
+  // }
 
   // var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
   @override
@@ -110,7 +143,7 @@ class _DetailPageState extends State<DetailPage> {
                   ],
                   leading: Padding(
                     padding: EdgeInsets.fromLTRB(14, 10, 0, 0),
-                    child: Image.asset('assets/logopng.png'),
+                    child:  Image.asset('assets/images/coronatracker.png'),
                   ),
                   backgroundColor: Colors.white,
                   title: Padding(
@@ -118,7 +151,7 @@ class _DetailPageState extends State<DetailPage> {
                     child: RichText(
                         text: TextSpan(children: [
                       TextSpan(
-                          text: 'Corona',
+                          text: 'Covid-19-',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 20,
@@ -136,601 +169,720 @@ class _DetailPageState extends State<DetailPage> {
               ),
               body: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Container(
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          width: 370,
-                          height: 140,
-                          child: Card(
+                child: Column(
+                  children: <Widget>[
+                    (dataState.menuDropDowm == false)
+                        ? Container()
+                        : MenuDropDownTopBar(),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        children: <Widget>[
+                          RepaintBoundary(
+                            key: _globalKey1,
                             child: Container(
+                              color: Colors.white,
                               child: Column(
                                 children: <Widget>[
-                                  SizedBox(
-                                    height: 10,
+                                  Container(
+                                    width: 375,
+                                    height: 140,
+                                    child: Card(
+                                      child: Container(
+                                        child: Column(
+                                          children: <Widget>[
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              children: <Widget>[
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Image.asset(
+                                                      'assets/h20-webp/${widget.country.countryCode.toLowerCase()}.webp'),
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  '${widget.country.country.toString()} Overview',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 18),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Column(
+                                              children: <Widget>[
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: <Widget>[
+                                                    Column(
+                                                      children: <Widget>[
+                                                        Text(
+                                                          widget.country
+                                                              .totalConfirmed
+                                                              .toString()
+                                                              .replaceAllMapped(
+                                                                  reg,
+                                                                  mathFunc),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 20,
+                                                              color:
+                                                                  DARK_RED_LIGHT),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "Confirmed",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16,
+                                                              color: DARK_GREY),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "+${widget.country.dailyConfirmed.toString().replaceAllMapped(reg, mathFunc)} new cases",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  DARK_RED_LIGHT),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      children: <Widget>[
+                                                        Text(
+                                                          widget.country
+                                                              .totalRecovered
+                                                              .toString()
+                                                              .replaceAllMapped(
+                                                                  reg,
+                                                                  mathFunc),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 20,
+                                                              color: Color(
+                                                                  0xff38a169)),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "Recovered",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16,
+                                                              color:
+                                                                  DARK_GREY),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      children: <Widget>[
+                                                        Text(
+                                                          widget.country
+                                                              .totalDeaths
+                                                              .toString()
+                                                              .replaceAllMapped(
+                                                                  reg,
+                                                                  mathFunc),
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 20,
+                                                              color: DARK_GREY),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "Deaths",
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 16,
+                                                              color: DARK_GREY),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 5,
+                                                        ),
+                                                        Text(
+                                                          "+${widget.country.dailyDeaths.toString().replaceAllMapped(reg, mathFunc)} new Deaths",
+                                                          style: TextStyle(
+                                                              color: DARK_GREY),
+                                                        ),
+                                                        SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ),
+
+                                  // Sparkline(
+                                  //   lineWidth: 10.0,
+                                  //   lineGradient: new LinearGradient(
+                                  //     begin: Alignment.topCenter,
+                                  //     end: Alignment.bottomCenter,
+                                  //     colors: [Colors.purple[800], Colors.purple[200]],
+                                  //   ),
+                                  //   data: data,
+                                  // ),
+
                                   Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: <Widget>[
-                                      SizedBox(
-                                        width: 10,
+                                      Card(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Stack(
+                                              alignment: Alignment.center,
+                                              children: [
+                                                SizedBox(
+                                                  height: 140,
+                                                  width: 170,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            20.0),
+                                                    child: SizedBox(
+                                                      height: 100,
+                                                      width: 100,
+                                                      child: CustomPaint(
+                                                          foregroundPainter: ProgressPainter(
+                                                              circleWidth: 5,
+                                                              completedPercentage:
+                                                                  double.parse(
+                                                                      widget
+                                                                          .country
+                                                                          .fR),
+                                                              defaultCircleColor:
+                                                                  Colors.grey[
+                                                                      300],
+                                                              percentageCompletedCircleColor:
+                                                                  Color(
+                                                                      0xffff9ab2))),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Column(
+                                                  children: <Widget>[
+                                                    Text(
+                                                      '${double.parse(widget.country.fR).abs().toStringAsFixed(2).toString()}%',
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      "OF TOTAL CASES",
+                                                      style: TextStyle(
+                                                          fontSize: 10,
+                                                          fontWeight:
+                                                              FontWeight.w400),
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 0, 0, 10),
+                                              child: Text(
+                                                "Fatality Rate",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Image.asset(
-                                            'assets/h20-webp/${widget.country.countryCode.toLowerCase()}.webp'),
-                                      ),
-                                      Text(
-                                        '${widget.country.country.toString()} Overview',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: <Widget>[
-                                          Column(
+                                      Card(
+                                        child: Container(
+                                          // decoration: BoxDecoration(
+                                          //     image: DecorationImage(
+                                          //         colorFilter:
+                                          //             ColorFilter.linearToSrgbGamma(),
+                                          //         alignment: Alignment.bottomLeft,
+                                          //         fit: BoxFit.cover,
+                                          //         image: AssetImage(
+                                          //           'assets/images/coronaimage.png',
+                                          //         ))),
+                                          child: Column(
                                             children: <Widget>[
-                                              Text(
-                                                widget.country.totalConfirmed
-                                                    .toString()
-                                                    .replaceAllMapped(
-                                                        reg, mathFunc),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: DARK_RED_LIGHT),
+                                              Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 140,
+                                                    width: 170,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              20.0),
+                                                      child: SizedBox(
+                                                        height: 100,
+                                                        width: 100,
+                                                        child: CustomPaint(
+                                                            foregroundPainter: ProgressPainter(
+                                                                circleWidth: 5,
+                                                                completedPercentage:
+                                                                    double.parse(
+                                                                        widget
+                                                                            .country
+                                                                            .pR),
+                                                                defaultCircleColor:
+                                                                    Colors.grey[
+                                                                        300],
+                                                                percentageCompletedCircleColor:
+                                                                    Color(
+                                                                        0xff4daff7))),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Column(
+                                                    children: <Widget>[
+                                                      Text(
+                                                        '${double.parse(widget.country.pR).abs().toStringAsFixed(2).toString()}%',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                      ),
+                                                      Text(
+                                                        "OF TOTAL CASES",
+                                                        style: TextStyle(
+                                                            fontSize: 10,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                "Confirmed",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                    color: DARK_GREY),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                "+${widget.country.dailyConfirmed.toString().replaceAllMapped(reg, mathFunc)} new cases",
-                                                style: TextStyle(
-                                                    color: DARK_RED_LIGHT),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        0, 0, 0, 10),
+                                                child: Text(
+                                                  "Recovery Rate",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               )
                                             ],
                                           ),
-                                          Column(
-                                            children: <Widget>[
-                                              Text(
-                                                widget.country.totalRecovered
-                                                    .toString()
-                                                    .replaceAllMapped(
-                                                        reg, mathFunc),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: Color(0xff38a169)),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                "Recovered",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                    color: DARK_GREY),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            children: <Widget>[
-                                              Text(
-                                                widget.country.totalDeaths
-                                                    .toString()
-                                                    .replaceAllMapped(
-                                                        reg, mathFunc),
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    color: DARK_GREY),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                "Deaths",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
-                                                    color: DARK_GREY),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                "+${widget.country.dailyDeaths.toString().replaceAllMapped(reg, mathFunc)} new Deaths",
-                                                style:
-                                                    TextStyle(color: DARK_GREY),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        // Sparkline(
-                        //   lineWidth: 10.0,
-                        //   lineGradient: new LinearGradient(
-                        //     begin: Alignment.topCenter,
-                        //     end: Alignment.bottomCenter,
-                        //     colors: [Colors.purple[800], Colors.purple[200]],
-                        //   ),
-                        //   data: data,
-                        // ),
-
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Card(
-                              child: Column(
-                                children: <Widget>[
-                                  Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 140,
-                                        width: 165,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(20.0),
-                                          child: SizedBox(
-                                            height: 100,
-                                            width: 100,
-                                            child: CustomPaint(
-                                                foregroundPainter: ProgressPainter(
-                                                    circleWidth: 5,
-                                                    completedPercentage:
-                                                        double.parse(
-                                                            widget.country.fR),
-                                                    defaultCircleColor:
-                                                        Colors.grey[300],
-                                                    percentageCompletedCircleColor:
-                                                        Color(0xffff9ab2))),
-                                          ),
                                         ),
-                                      ),
-                                      Column(
-                                        children: <Widget>[
-                                          Text(
-                                            '${double.parse(widget.country.fR).abs().toStringAsFixed(2).toString()}%',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          Text(
-                                            "OF TOTAL CASES",
-                                            style: TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.w400),
-                                          )
-                                        ],
                                       ),
                                     ],
                                   ),
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: Text(
-                                      "Fatality Rate",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: SizedBox(
+                                      height: 150,
+                                      width: 400,
+                                      child: Card(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  colorFilter: ColorFilter.mode(
+                                                      Colors.white,
+                                                      BlendMode.softLight),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                    'assets/images/linegraph4.png',
+                                                  ))),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Text(
+                                                      "Critical Cases treated in ICU",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        12.0, 10, 10, 10),
+                                                    child: Text(
+                                                      widget
+                                                          .country.totalCritical
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 23),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding: const EdgeInsets
+                                                              .fromLTRB(
+                                                          12.0, 10, 10, 10),
+                                                      child: RichText(
+                                                          text: TextSpan(
+                                                              style: TextStyle(
+                                                                  fontSize: 17,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300),
+                                                              children: [
+                                                            TextSpan(
+                                                                text: (widget.country.totalCritical /
+                                                                            widget
+                                                                                .country.totalConfirmed *
+                                                                            100)
+                                                                        .toStringAsFixed(
+                                                                            2)
+                                                                        .toString() +
+                                                                    '% ',
+                                                                style: TextStyle(
+                                                                    color:
+                                                                        DARK_RED_LIGHT)),
+                                                            TextSpan(
+                                                                text:
+                                                                    'of total cases',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black))
+                                                          ]))),
+                                                  // Sparkline(
+                                                  //   lineWidth: 10.0,
+                                                  //   lineGradient: new LinearGradient(
+                                                  //     begin: Alignment.topCenter,
+                                                  //     end: Alignment.bottomCenter,
+                                                  //     colors: [
+                                                  //       Colors.purple[800],
+                                                  //       Colors.purple[200]
+                                                  //     ],
+                                                  //   ),
+                                                  //   data: data,
+                                                  // ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  )
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: SizedBox(
+                                      height: 150,
+                                      width: 400,
+                                      child: Card(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  colorFilter: ColorFilter.mode(
+                                                      Colors.white,
+                                                      BlendMode.softLight),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                    'assets/images/linegraph4.png',
+                                                  ))),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Text(
+                                                      "Daily Cases Receiving Treatment",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        12.0, 10, 10, 10),
+                                                    child: Text(
+                                                      widget.country.activeCases
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 23),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding: const EdgeInsets
+                                                              .fromLTRB(
+                                                          12.0, 10, 10, 10),
+                                                      child: RichText(
+                                                          text: TextSpan(
+                                                              style: TextStyle(
+                                                                  fontSize: 17,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300),
+                                                              children: [
+                                                            TextSpan(
+                                                                text: (widget.country.activeCases /
+                                                                            widget
+                                                                                .country.totalConfirmed *
+                                                                            100)
+                                                                        .toStringAsFixed(
+                                                                            2)
+                                                                        .toString() +
+                                                                    '% ',
+                                                                style: TextStyle(
+                                                                    color:
+                                                                        DARK_RED_LIGHT)),
+                                                            TextSpan(
+                                                                text:
+                                                                    'of total cases',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black))
+                                                          ]))),
+                                                  // Sparkline(
+                                                  //   lineWidth: 10.0,
+                                                  //   lineGradient: new LinearGradient(
+                                                  //     begin: Alignment.topCenter,
+                                                  //     end: Alignment.bottomCenter,
+                                                  //     colors: [
+                                                  //       Colors.purple[800],
+                                                  //       Colors.purple[200]
+                                                  //     ],
+                                                  //   ),
+                                                  //   data: data,
+                                                  // ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: SizedBox(
+                                      height: 150,
+                                      width: 400,
+                                      child: Card(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  colorFilter: ColorFilter.mode(
+                                                      Colors.white,
+                                                      BlendMode.softLight),
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  fit: BoxFit.cover,
+                                                  image: AssetImage(
+                                                    'assets/images/linegraph4.png',
+                                                  ))),
+                                          child: Row(
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            12.0),
+                                                    child: Text(
+                                                      "Daily Confirmed Cases",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        12.0, 10, 10, 10),
+                                                    child: Text(
+                                                      widget.country
+                                                          .totalConfirmedPerMillionPopulation
+                                                          .toString(),
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 23),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                      padding: const EdgeInsets
+                                                              .fromLTRB(
+                                                          12.0, 10, 10, 10),
+                                                      child: RichText(
+                                                          text: TextSpan(
+                                                              style: TextStyle(
+                                                                  fontSize: 17,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300),
+                                                              children: [
+                                                            // TextSpan(
+                                                            //     text: '0.0% ',
+                                                            //     style: TextStyle(
+                                                            //         color: DARK_RED_LIGHT)),
+                                                            TextSpan(
+                                                                text:
+                                                                    'Per Million Population',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black))
+                                                          ]))),
+                                                  // Sparkline(
+                                                  //   lineWidth: 10.0,
+                                                  //   lineGradient: new LinearGradient(
+                                                  //     begin: Alignment.topCenter,
+                                                  //     end: Alignment.bottomCenter,
+                                                  //     colors: [
+                                                  //       Colors.purple[800],
+                                                  //       Colors.purple[200]
+                                                  //     ],
+                                                  //   ),
+                                                  //   data: data,
+                                                  // ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
                                 ],
                               ),
                             ),
-                            Card(
-                              child: Container(
-                                // decoration: BoxDecoration(
-                                //     image: DecorationImage(
-                                //         colorFilter:
-                                //             ColorFilter.linearToSrgbGamma(),
-                                //         alignment: Alignment.bottomLeft,
-                                //         fit: BoxFit.cover,
-                                //         image: AssetImage(
-                                //           'assets/images/coronaimage.png',
-                                //         ))),
-                                child: Column(
-                                  children: <Widget>[
-                                    Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        SizedBox(
-                                          height: 140,
-                                          width: 165,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: SizedBox(
-                                              height: 100,
-                                              width: 100,
-                                              child: CustomPaint(
-                                                  foregroundPainter: ProgressPainter(
-                                                      circleWidth: 5,
-                                                      completedPercentage:
-                                                          double.parse(widget
-                                                              .country.pR),
-                                                      defaultCircleColor:
-                                                          Colors.grey[300],
-                                                      percentageCompletedCircleColor:
-                                                          Color(0xff4daff7))),
-                                            ),
-                                          ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  width: 5,
+                                  height: 40,
+                                  color: GREEN_COLOR,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    // convertWidgetToImage();
+                                    newsFetch.getVirusData('50');
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(7.0),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          'VERIFIED NEWS',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: GREEN_COLOR,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Column(
-                                          children: <Widget>[
-                                            Text(
-                                              '${double.parse(widget.country.pR).abs().toStringAsFixed(2).toString()}%',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                            Text(
-                                              "OF TOTAL CASES",
-                                              style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.w400),
-                                            )
-                                          ],
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Icon(
+                                          Icons.refresh,
+                                          color: GREEN_COLOR,
                                         ),
                                       ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          0, 0, 0, 10),
-                                      child: Text(
-                                        "Recovery Rate",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 150,
-                          width: 400,
-                          child: Card(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      colorFilter: ColorFilter.mode(
-                                          Colors.white, BlendMode.softLight),
-                                      alignment: Alignment.centerLeft,
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                        'assets/images/linegraph4.png',
-                                      ))),
-                              child: Row(
-                                children: <Widget>[
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Text(
-                                          "Critical Cases treated in ICU",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            12.0, 10, 10, 10),
-                                        child: Text(
-                                          widget.country.totalCritical
-                                              .toString(),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 23),
-                                        ),
-                                      ),
-                                      Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              12.0, 10, 10, 10),
-                                          child: RichText(
-                                              text: TextSpan(
-                                                  style: TextStyle(
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w300),
-                                                  children: [
-                                                TextSpan(
-                                                    text: (widget.country
-                                                                    .totalCritical /
-                                                                widget.country
-                                                                    .totalConfirmed *
-                                                                100)
-                                                            .toStringAsFixed(2)
-                                                            .toString() +
-                                                        '% ',
-                                                    style: TextStyle(
-                                                        color: DARK_RED_LIGHT)),
-                                                TextSpan(
-                                                    text: 'of total cases',
-                                                    style: TextStyle(
-                                                        color: Colors.black))
-                                              ]))),
-                                      // Sparkline(
-                                      //   lineWidth: 10.0,
-                                      //   lineGradient: new LinearGradient(
-                                      //     begin: Alignment.topCenter,
-                                      //     end: Alignment.bottomCenter,
-                                      //     colors: [
-                                      //       Colors.purple[800],
-                                      //       Colors.purple[200]
-                                      //     ],
-                                      //   ),
-                                      //   data: data,
-                                      // ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 150,
-                          width: 400,
-                          child: Card(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      colorFilter: ColorFilter.mode(
-                                          Colors.white, BlendMode.softLight),
-                                      alignment: Alignment.centerLeft,
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                        'assets/images/linegraph4.png',
-                                      ))),
-                              child: Row(
-                                children: <Widget>[
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Text(
-                                          "Daily Cases Receiving Treatment",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            12.0, 10, 10, 10),
-                                        child: Text(
-                                          widget.country.activeCases.toString(),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 23),
-                                        ),
-                                      ),
-                                      Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              12.0, 10, 10, 10),
-                                          child: RichText(
-                                              text: TextSpan(
-                                                  style: TextStyle(
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w300),
-                                                  children: [
-                                                TextSpan(
-                                                    text: (widget.country
-                                                                    .activeCases /
-                                                                widget.country
-                                                                    .totalConfirmed *
-                                                                100)
-                                                            .toStringAsFixed(2)
-                                                            .toString() +
-                                                        '% ',
-                                                    style: TextStyle(
-                                                        color: DARK_RED_LIGHT)),
-                                                TextSpan(
-                                                    text: 'of total cases',
-                                                    style: TextStyle(
-                                                        color: Colors.black))
-                                              ]))),
-                                      // Sparkline(
-                                      //   lineWidth: 10.0,
-                                      //   lineGradient: new LinearGradient(
-                                      //     begin: Alignment.topCenter,
-                                      //     end: Alignment.bottomCenter,
-                                      //     colors: [
-                                      //       Colors.purple[800],
-                                      //       Colors.purple[200]
-                                      //     ],
-                                      //   ),
-                                      //   data: data,
-                                      // ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 150,
-                          width: 400,
-                          child: Card(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      colorFilter: ColorFilter.mode(
-                                          Colors.white, BlendMode.softLight),
-                                      alignment: Alignment.centerLeft,
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                        'assets/images/linegraph4.png',
-                                      ))),
-                              child: Row(
-                                children: <Widget>[
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Text(
-                                          "Daily Confirmed Cases",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            12.0, 10, 10, 10),
-                                        child: Text(
-                                           widget.country.totalConfirmedPerMillionPopulation.toString(),
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 23),
-                                        ),
-                                      ),
-                                      Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              12.0, 10, 10, 10),
-                                          child: RichText(
-                                              text: TextSpan(
-                                                  style: TextStyle(
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w300),
-                                                  children: [
-                                                // TextSpan(
-                                                //     text: '0.0% ',
-                                                //     style: TextStyle(
-                                                //         color: DARK_RED_LIGHT)),
-                                                TextSpan(
-                                                    text:
-                                                        'Per Million Population',
-                                                    style: TextStyle(
-                                                        color: Colors.black))
-                                              ]))),
-                                      // Sparkline(
-                                      //   lineWidth: 10.0,
-                                      //   lineGradient: new LinearGradient(
-                                      //     begin: Alignment.topCenter,
-                                      //     end: Alignment.bottomCenter,
-                                      //     colors: [
-                                      //       Colors.purple[800],
-                                      //       Colors.purple[200]
-                                      //     ],
-                                      //   ),
-                                      //   data: data,
-                                      // ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                width: 5,
-                                height: 40,
-                                color: GREEN_COLOR,
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  newsFetch.getVirusData('50');
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(7.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text(
-                                        'VERIFIED NEWS',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: GREEN_COLOR,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Icon(
-                                        Icons.refresh,
-                                        color: GREEN_COLOR,
-                                      ),
-                                    ],
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        NewsSection()
-                      ],
+                          SizedBox(
+                            height: 10,
+                          ),
+                          NewsSection()
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             );

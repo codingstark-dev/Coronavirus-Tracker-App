@@ -2,7 +2,6 @@ import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/http/api.dart';
 import 'package:flutter/foundation.dart';
 
-import 'getsinglereport.dart';
 
 class GetGlobal with ChangeNotifier {
   Country country;

@@ -4,7 +4,6 @@ import 'package:coronatracker/Freezed/covid_freezed.dart';
 import 'package:coronatracker/constant/allConstant.dart';
 import 'package:coronatracker/constant/routung_constant.dart';
 import 'package:coronatracker/provider/boolstates.dart';
-import 'package:coronatracker/provider/getGlobal.dart';
 import 'package:coronatracker/provider/getsinglereport.dart';
 import 'package:coronatracker/provider/newsfetch.dart';
 import 'package:coronatracker/widget/dropdown_search.dart';
@@ -64,13 +63,13 @@ class _BodyContainerState extends State<BodyContainer> {
     // final country = Provider.of<GetGlobal>(context, listen: false);
     Provider.of<SingleReport>(context, listen: false).getglobaldata();
     Provider.of<NewsFetch>(context, listen: false).getVirusData('50');
-    timer = Timer.periodic(Duration(seconds: 60), (Timer t) {
+    timer = Timer.periodic(Duration(minutes: 2), (Timer t) {
       return Provider.of<SingleReport>(context, listen: false).getglobaldata();
     });
-    timer2 = Timer.periodic(Duration(seconds: 60), (Timer t) {
+    timer2 = Timer.periodic(Duration(minutes: 2), (Timer t) {
       return Provider.of<SingleReport>(context, listen: false).getcountrydata();
     });
-    timer3 = Timer.periodic(Duration(seconds: 60), (Timer t) {
+    timer3 = Timer.periodic(Duration(minutes: 2), (Timer t) {
       return Provider.of<NewsFetch>(context, listen: false).getVirusData('100');
     });
     // Create separate ScrollControllers as you need them:
@@ -195,9 +194,6 @@ class _BodyContainerState extends State<BodyContainer> {
                                   totalDeaths: singleReport.countryReport.totalDeaths[index],
                                   totalRecovered: singleReport.countryReport.totalRecovered[index]));
                           // print(singleReport.countryReport.country[index]);
-                          Fluttertoast.showToast(
-                              msg:
-                                  'This Feature Will Come Soon And Stay Tune!');
                         },
                         child: Row(
                           children: <Widget>[
@@ -433,7 +429,8 @@ class _BodyContainerState extends State<BodyContainer> {
                                         flex: 2,
                                         child: FlatButton.icon(
                                             hoverColor: Colors.blueAccent,
-                                            onPressed: () => singleReport.getglobaldata(),
+                                            onPressed: () =>
+                                                singleReport.getglobaldata(),
                                             icon: Icon(
                                               Icons.refresh,
                                               color: Colors.green,
@@ -758,10 +755,8 @@ class _BodyContainerState extends State<BodyContainer> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      if (singleReport.country.dailyConfirmed !=
-                                              0 ||
-                                          singleReport.country.dailyConfirmed >
-                                              0) {
+                                      if (singleReport.country.lastUpdated !=
+                                          "") {
                                         Navigator.pushNamed(
                                             context, DetailPageCountry,
                                             arguments: singleReport.country);
@@ -791,64 +786,92 @@ class _BodyContainerState extends State<BodyContainer> {
                         SizedBox(
                           height: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-                          child: Container(
-                            child: Text(
-                              ' Source: Indian Government, Mygov.in, Covid19india.org  ',
-                              style: TextStyle(
-                                  color: Color(0xffa0aec0),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => Navigator.pushNamed(context, FAQSpage),
-                          child: Container(
-                            height: 60,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 5),
-                              child: Card(
-                                elevation: 2.3,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(6.0),
-                                          child: Image.asset(
-                                            'assets/h20-webp/in.webp',
-                                            width: 20,
-                                            height: 20,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            "India Covid-19 (Live Report - Beta)",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                color: GREEN_COLOR,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: GREEN_COLOR,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                        //   child: Container(
+                        //     child: Text(
+                        //       ' Source: Indian Government, Mygov.in, Covid19india.org  ',
+                        //       style: TextStyle(
+                        //           color: Color(0xffa0aec0),
+                        //           fontSize: 14,
+                        //           fontWeight: FontWeight.w500),
+                        //     ),
+                        //   ),
+                        // ),
+                        // InkWell(
+                        //   onTap: () {
+                        //     Navigator.pushNamed(context, DetailPageCountry,
+                        //         arguments: Country(
+                        //             activeCases: singleReport
+                        //                 .countryReport.activeCases[1],
+                        //             dailyConfirmed: singleReport
+                        //                 .countryReport.dailyConfirmed[1],
+                        //             dailyDeaths: singleReport
+                        //                 .countryReport.dailyDeaths[1],
+                        //             fR: singleReport.countryReport.fR[1],
+                        //             pR: singleReport.countryReport.pR[1],
+                        //             lastUpdated: singleReport
+                        //                 .countryReport.lastUpdated[1],
+                        //             totalConfirmedPerMillionPopulation: singleReport
+                        //                 .countryReport
+                        //                 .totalConfirmedPerMillionPopulation[1],
+                        //             totalCritical: singleReport
+                        //                 .countryReport.totalCritical[1],
+                        //             totalDeathsPerMillionPopulation:
+                        //                 singleReport.countryReport
+                        //                     .totalDeathsPerMillionPopulation[1],
+                        //             countryCode: singleReport
+                        //                 .countryReport.countryCode[1],
+                        //             country: singleReport.countryReport.country[1],
+                        //             totalConfirmed: singleReport.countryReport.totalConfirmed[1],
+                        //             totalDeaths: singleReport.countryReport.totalDeaths[1],
+                        //             totalRecovered: singleReport.countryReport.totalRecovered[1]));
+                        //   },
+                        //   child: Container(
+                        //     height: 60,
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 5),
+                        //       child: Card(
+                        //         elevation: 2.3,
+                        //         child: Row(
+                        //           crossAxisAlignment: CrossAxisAlignment.center,
+                        //           mainAxisAlignment:
+                        //               MainAxisAlignment.spaceBetween,
+                        //           children: <Widget>[
+                        //             Row(
+                        //               children: <Widget>[
+                        //                 Padding(
+                        //                   padding: const EdgeInsets.all(6.0),
+                        //                   child: Image.asset(
+                        //                     'assets/h20-webp/in.webp',
+                        //                     width: 20,
+                        //                     height: 20,
+                        //                   ),
+                        //                 ),
+                        //                 Padding(
+                        //                   padding: const EdgeInsets.all(8.0),
+                        //                   child: Text(
+                        //                     "India Covid-19 (Live Report - Beta)",
+                        //                     textAlign: TextAlign.center,
+                        //                     style: TextStyle(
+                        //                         color: GREEN_COLOR,
+                        //                         fontWeight: FontWeight.bold,
+                        //                         fontSize: 16),
+                        //                   ),
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //             Icon(
+                        //               Icons.arrow_forward_ios,
+                        //               color: GREEN_COLOR,
+                        //             )
+                        //           ],
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                      
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
                           child: Container(
